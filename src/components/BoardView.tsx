@@ -936,6 +936,7 @@ export function BoardView({
               onEditCard={onEditCard}
               onOpenCard={(c) => setSelectedCardId(c.id)}
               onAddCard={onAddCard}
+              onSetListColor={canEdit ? onSetListColor : undefined}
               onMoveCard={onMoveCardToCell}
               onAddSwimlane={onAddSwimlane}
               onRenameSwimlane={onRenameSwimlane}

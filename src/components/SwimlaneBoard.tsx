@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight, GripVertical, MoreHorizontal, Plus, Trash2, Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { BOARD_COLORS } from '@/lib/colors';
+import { Palette, X } from 'lucide-react';
 import type { Card, Swimlane } from '@/types';
 import { CardItem } from './ListView';
 import { Button } from '@/components/ui/button';
@@ -21,6 +23,7 @@ interface SwimlaneBoardProps {
   onEditCard: (cardId: string, title: string) => Promise<boolean>;
   onOpenCard: (card: Card) => void;
   onAddCard: (title: string, listId: string) => void;
+  onSetListColor?: (listId: string, color: string | null) => void;
   onMoveCard: (args: { cardId: string; toListId: string; toSwimlaneId: string | null; toIndex: number }) => void;
   onAddSwimlane: (name: string) => Promise<boolean>;
   onRenameSwimlane: (swimlaneId: string, name: string) => Promise<boolean>;
@@ -42,6 +45,7 @@ export function SwimlaneBoard({
   onEditCard,
   onOpenCard,
   onAddCard,
+  onSetListColor,
   onMoveCard,
   onAddSwimlane,
   onRenameSwimlane,
@@ -398,11 +402,52 @@ export function SwimlaneBoard({
   return (
     <div className="flex min-h-0 flex-col gap-2" aria-label="Swimlane board">
       {/* Column headers: the lists stay on top as columns */}
-      <div className="flex gap-3" aria-hidden>
+      <div className="flex gap-3">
         <div className="w-44 shrink-0" />
         {lists.map((list) => (
-          <div key={list.id} className="w-72 shrink-0 px-1">
-            <p className="truncate text-[13px] font-semibold text-foreground">{list.title}</p>
+          <div key={list.id} className="flex w-72 shrink-0 items-center gap-1 px-1">
+            {list.color && (
+              <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: list.color }} aria-hidden />
+            )}
+            <p className="min-w-0 flex-1 truncate text-[13px] font-semibold text-foreground">{list.title}</p>
+            {onSetListColor && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0 text-muted-foreground/60 hover:bg-black/[0.05] hover:text-foreground" aria-label={`List menu for ${list.title}`}>
+                    <MoreHorizontal className="h-3.5 w-3.5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <div className="px-2 py-1.5">
+                    <p className="mb-1 flex items-center gap-2 text-[11px] font-medium text-muted-foreground">
+                      <Palette className="h-3 w-3" aria-hidden /> List color
+                    </p>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => onSetListColor(list.id, null)}
+                        aria-label="Remove list color"
+                        title="No color"
+                        className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[10px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
+                      >
+                        <X className="h-3 w-3" aria-hidden />
+                      </button>
+                      {BOARD_COLORS.map((c) => (
+                        <button
+                          key={c.hex}
+                          type="button"
+                          onClick={() => onSetListColor(list.id, c.hex)}
+                          aria-label={`Set list color to ${c.name}`}
+                          aria-pressed={list.color === c.hex}
+                          className={cn('h-5 w-5 rounded-full transition-transform', list.color === c.hex ? 'scale-110 ring-2 ring-offset-1 ring-[#2A2F36]' : 'hover:scale-105 opacity-80')}
+                          style={{ backgroundColor: c.hex }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         ))}
       </div>
