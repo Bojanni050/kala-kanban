@@ -105,9 +105,29 @@ router.post('/:id/apply-template', async (req: Request, res: Response) => {
       const swimlaneKeys = new Set(existingSwimlanes.map((s) => keyOf(s.name)));
       const cardTypeKeys = new Set(existingCardTypes.map((c) => keyOf(c.name)));
 
+      // Existing lists that already exist by name are reused untouched, except
+      // that a list without a color picks up the template's default color so
+      // re-applying a template also colour-codes columns that were made earlier.
+      const existingLists = await tx.list.findMany({ where: { boardId }, select: { id: true, title: true, color: true } });
+      const existingByTitle = new Map(existingLists.map((l) => [keyOf(l.title), l]));
+      const recoloredLists = [];
+      for (const item of lists) {
+        const existingList = existingByTitle.get(keyOf(item.name));
+        if (existingList && !existingList.color && item.color) {
+          recoloredLists.push(
+            await tx.list.update({
+              where: { id: existingList.id },
+              data: { color: item.color },
+              include: { cards: { orderBy: { position: 'asc' } } },
+            })
+          );
+        }
+      }
+
       const listStart = lastList ? lastList.position + 1 : 0;
       const createdLists = [];
       for (let i = 0; i < lists.length; i++) {
+        if (existingByTitle.has(keyOf(lists[i].name))) continue;
         createdLists.push(
           await tx.list.create({
             data: { title: lists[i].name, color: lists[i].color, boardId, position: listStart + i },

@@ -153,12 +153,12 @@ function App() {
         }
         case 'list.updated': {
           const list = event.data as List;
-          // Merge title/position only: the payload's cards snapshot may be
+          // Merge title/color/position only: the payload's cards snapshot may be
           // stale relative to local card state, which events keep in sync.
           return {
             ...prev,
             lists: prev.lists
-              .map((l) => (l.id === list.id ? { ...l, title: list.title, position: list.position } : l))
+              .map((l) => (l.id === list.id ? { ...l, title: list.title, color: list.color, position: list.position } : l))
               .sort(byPosition),
           };
         }
