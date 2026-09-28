@@ -227,7 +227,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
     }
   };
 
-  const chipClass = 'rounded-lg border bg-white px-3 py-2 text-left text-[13px] text-foreground transition-colors hover:bg-[#FAFAF8] disabled:opacity-50';
+  const chipClass = 'rounded-lg border bg-white px-3 py-2 text-left text-[13px] text-foreground transition-colors hover:kala-surface disabled:opacity-50';
 
   return (
     <aside
@@ -317,7 +317,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
                 <div
                   className={cn(
                     'rounded-2xl rounded-bl-md border px-3 py-2',
-                    message.error ? 'border-destructive/25 bg-destructive/[0.06] text-destructive' : 'bg-[#FAFAF8] text-foreground/90'
+                    message.error ? 'border-destructive/25 bg-destructive/[0.06] text-destructive' : 'kala-surface text-foreground/90'
                   )}
                   style={message.error ? undefined : line}
                   role={message.error ? 'alert' : undefined}
@@ -352,7 +352,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
       {enabled !== false && card && messages.length > 0 && (
         <div className="flex gap-1.5 overflow-x-auto border-t px-4 py-2" style={line}>
           {CARD_ACTIONS.map(({ action, label }) => (
-            <button key={action} type="button" disabled={loading} className="shrink-0 rounded-full border bg-white px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:bg-[#FAFAF8] hover:text-foreground disabled:opacity-50" style={line} onClick={() => void send(label, action)}>
+            <button key={action} type="button" disabled={loading} className="shrink-0 rounded-full border bg-white px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:kala-surface hover:text-foreground disabled:opacity-50" style={line} onClick={() => void send(label, action)}>
               {label}
             </button>
           ))}

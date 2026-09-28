@@ -78,7 +78,7 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#FAFAF8] p-4">
+    <div className="flex min-h-screen items-center justify-center kala-surface p-4">
       <div className="w-full max-w-md">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <KalaLogo size={52} />
@@ -98,7 +98,7 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
             <CardHeader className="pb-4">
               <CardTitle className="sr-only">Sign in to Kala</CardTitle>
               <CardDescription className="sr-only">Sign in or create a Kala account</CardDescription>
-              <TabsList className="grid w-full grid-cols-2 bg-[#F2F1ED]">
+              <TabsList className="grid w-full grid-cols-2 kala-surface-note">
                 <TabsTrigger value="login">Sign In</TabsTrigger>
                 <TabsTrigger value="register">Register</TabsTrigger>
               </TabsList>

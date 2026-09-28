@@ -30,6 +30,28 @@ html, body, #root {
   padding: 0;
 }
 
+/* Night mode: override the brand tokens when the .dark class is set on <html> */
+html.dark {
+  --kala-charcoal: #e8e9eb;
+  --kala-ink: #c9ccd1;
+  --kala-coral: #d98a6e;
+  --kala-coral-strong: #e2a08a;
+  --kala-coral-soft: #3a2e29;
+  --kala-sage: #8db8a3;
+  --kala-sage-soft: #26302b;
+  --kala-canvas: #191d23;
+  --kala-line: #2e343d;
+}
+html.dark body {
+  background-color: var(--kala-canvas);
+}
+html.dark .kala-card {
+  background-color: #22272f;
+}
+html.dark .kala-list {
+  background: #1e2229;
+}
+
 @layer base {
   :root {
     --background: 60 9% 98%;
@@ -118,6 +140,31 @@ html, body, #root {
   }
   .kala-section-label {
     @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground;
+  }
+  /* Soft surface tints used across dialogs and cards; each has a night-mode counterpart */
+  .kala-surface {
+    background-color: #fdfdfc;
+  }
+  .kala-surface-subtle {
+    background-color: #f5f4f1;
+  }
+  .kala-surface-note {
+    background-color: #f2f1ed;
+  }
+  .kala-surface-active {
+    background-color: #f2f0eb;
+  }
+  html.dark .kala-surface {
+    background-color: #22272f;
+  }
+  html.dark .kala-surface-subtle {
+    background-color: #262b33;
+  }
+  html.dark .kala-surface-note {
+    background-color: #1e2229;
+  }
+  html.dark .kala-surface-active {
+    background-color: #2a3038;
   }
   .kala-icon-btn {
     @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none;

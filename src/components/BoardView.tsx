@@ -519,9 +519,9 @@ export function BoardView({
   const myRoleMeta = ROLE_META[board.myRole];
 
   return (
-    <div className="flex h-full flex-col bg-[#FAFAF8]">
+    <div className="flex h-full flex-col kala-surface">
       {/* ── Board header ─────────────────────────────────── */}
-      <header className="border-b bg-[#fdfdfc]" style={{ borderColor: 'var(--kala-line)' }}>
+      <header className="border-b kala-surface" style={{ borderColor: 'var(--kala-line)' }}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5">
           {/* Left: sidebar toggle + breadcrumb */}
           <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -615,7 +615,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setAssigneeFilter('all')}
                     aria-pressed={assigneeFilter === 'all'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'all' ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>Everyone</span>
                     {assigneeFilter === 'all' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -624,7 +624,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setAssigneeFilter('unassigned')}
                     aria-pressed={assigneeFilter === 'unassigned'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'unassigned' ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'unassigned' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>Unassigned</span>
                     {assigneeFilter === 'unassigned' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -637,7 +637,7 @@ export function BoardView({
                         type="button"
                         onClick={() => setAssigneeFilter(member.userId)}
                         aria-pressed={selected}
-                        className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', selected ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                        className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', selected ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                       >
                         <span className="flex min-w-0 items-center gap-2">
                           <MemberAvatar person={member} size="sm" />
@@ -654,7 +654,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setCardTypeFilter('all')}
                     aria-pressed={cardTypeFilter === 'all'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'all' ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>All Types</span>
                     {cardTypeFilter === 'all' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -663,7 +663,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setCardTypeFilter('none')}
                     aria-pressed={cardTypeFilter === 'none'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'none' ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'none' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span className="italic text-muted-foreground">No type</span>
                     {cardTypeFilter === 'none' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -674,7 +674,7 @@ export function BoardView({
                       type="button"
                       onClick={() => setCardTypeFilter(ct.id)}
                       aria-pressed={cardTypeFilter === ct.id}
-                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === ct.id ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === ct.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                     >
                       <span className="flex min-w-0 items-center gap-2">
                         <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: ct.color }} aria-hidden />
@@ -692,7 +692,7 @@ export function BoardView({
                       type="button"
                       onClick={() => setDueDateFilter(opt.id)}
                       aria-pressed={dueDateFilter === opt.id}
-                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', dueDateFilter === opt.id ? 'bg-[#F2F0EB] font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', dueDateFilter === opt.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                     >
                       <span>{opt.label}</span>
                       {dueDateFilter === opt.id && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -740,7 +740,7 @@ export function BoardView({
                     onClick={() => setAssigneeFilter(key)}
                     className={cn(
                       'inline-flex h-7 items-center rounded-[5px] px-2.5 text-[12px] font-medium transition-colors',
-                      active ? 'bg-[#F2F0EB] text-foreground' : 'text-muted-foreground hover:text-foreground'
+                      active ? 'kala-surface-active text-foreground' : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
                     {key === 'all' ? 'All' : key === 'me' ? 'My Cards' : 'Unassigned'}
@@ -816,7 +816,7 @@ export function BoardView({
 
         {/* Active filters — always visible when set, with Clear */}
         {isFiltered && (
-          <div className="flex flex-wrap items-center gap-1.5 border-t bg-[#F5F4F1] px-4 py-2 text-xs" style={{ borderColor: 'var(--kala-line)' }} role="status" aria-label="Active filters">
+          <div className="flex flex-wrap items-center gap-1.5 border-t kala-surface-subtle px-4 py-2 text-xs" style={{ borderColor: 'var(--kala-line)' }} role="status" aria-label="Active filters">
             <span className="mr-1 font-medium text-muted-foreground">Active:</span>
             {searchQuery.trim() && (
               <Badge variant="secondary" className="gap-1 bg-white py-0.5 pr-1 text-xs font-normal">
@@ -881,7 +881,7 @@ export function BoardView({
                       <Button onClick={() => setIsAddingList(true)} className="gap-1.5 bg-[#2A2F36] text-white hover:bg-[#1E2329]">
                         <Plus className="h-4 w-4" aria-hidden /> Add your first list
                       </Button>
-                      <Button variant="outline" onClick={() => setIsTemplatePickerOpen(true)} className="gap-1.5 bg-[#fdfdfc]">
+                      <Button variant="outline" onClick={() => setIsTemplatePickerOpen(true)} className="gap-1.5 kala-surface">
                         <LayoutTemplate className="h-4 w-4" aria-hidden /> Use a template
                       </Button>
                     </div>
@@ -912,7 +912,7 @@ export function BoardView({
                             : 'No cards match these filters'
                   }
                   description="Try a different keyword, remove a filter, or clear everything to see the full board."
-                  action={<Button variant="outline" size="sm" onClick={handleClearAllFilters} className="bg-[#fdfdfc]">Clear filters</Button>}
+                  action={<Button variant="outline" size="sm" onClick={handleClearAllFilters} className="kala-surface">Clear filters</Button>}
                 />
               </div>
               <div className="flex gap-3 overflow-x-auto pb-2 opacity-60" aria-hidden>
@@ -1133,7 +1133,7 @@ export function BoardView({
       />
 
       <Dialog open={isTeamPanelOpen} onOpenChange={setIsTeamPanelOpen}>
-        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-md flex-col bg-[#fdfdfc]">
+        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-md flex-col kala-surface">
           <DialogHeader className="text-left">
             <DialogTitle>Team</DialogTitle>
             <DialogDescription>
@@ -1254,7 +1254,7 @@ export function BoardView({
                                                   : null;
                     if (!text) return null;
                     return (
-                      <li key={entry.id} className="flex items-center justify-between gap-3 rounded-lg bg-[#F5F4F1] px-3 py-1.5 text-[12px]">
+                      <li key={entry.id} className="flex items-center justify-between gap-3 rounded-lg kala-surface-subtle px-3 py-1.5 text-[12px]">
                         <span className="min-w-0 truncate text-muted-foreground">{text}</span>
                         <span className="shrink-0 text-[11px] text-muted-foreground/70">{format(new Date(entry.createdAt), 'MMM d, HH:mm')}</span>
                       </li>
@@ -1396,7 +1396,7 @@ export function BoardView({
             {canManageBoard(board.myRole) && onAddCardType && (
               <>
                 {isAddingCardType ? (
-                  <div className="space-y-2 rounded-lg border bg-[#FAFAF8] p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
+                  <div className="space-y-2 rounded-lg border kala-surface p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
                     <Input
                       value={newCardTypeName}
                       onChange={(e) => setNewCardTypeName(e.target.value)}

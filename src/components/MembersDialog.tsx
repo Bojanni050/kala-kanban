@@ -227,7 +227,7 @@ export function MembersDialog({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-xl flex-col bg-[#fdfdfc]">
+        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-xl flex-col kala-surface">
           <DialogHeader className="text-left">
             <DialogTitle>Share &ldquo;{boardName}&rdquo;</DialogTitle>
             <DialogDescription>
@@ -255,7 +255,7 @@ export function MembersDialog({
                 </p>
 
                 {lastInvite && (
-                  <div className="space-y-2 rounded-lg border bg-[#F5F4F1] p-3 text-xs" style={{ borderColor: 'var(--kala-line)' }}>
+                  <div className="space-y-2 rounded-lg border kala-surface-subtle p-3 text-xs" style={{ borderColor: 'var(--kala-line)' }}>
                     <p className="text-foreground">
                       Invitation sent to <span className="font-semibold">{lastInvite.email}</span> as {ROLE_META[lastInvite.role].label}. The link below is a backup, in case the email does not arrive:
                     </p>
@@ -372,7 +372,7 @@ export function MembersDialog({
             )}
 
             {/* Role legend — makes roles understandable */}
-            <section aria-label="What each role can do" className="rounded-lg bg-[#F5F4F1] p-3" style={{ border: '1px solid var(--kala-line)' }}>
+            <section aria-label="What each role can do" className="rounded-lg kala-surface-subtle p-3" style={{ border: '1px solid var(--kala-line)' }}>
               <h3 className="kala-section-label pb-2">What each role can do</h3>
               <ul className="grid gap-1.5 sm:grid-cols-2">
                 {(Object.keys(ROLE_META) as BoardRole[]).map((r) => {

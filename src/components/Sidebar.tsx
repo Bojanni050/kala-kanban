@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { applyTheme, type Theme } from '@/lib/theme';
 import {
   Briefcase,
   Check,
   ChevronsUpDown,
   LayoutDashboard,
+  Moon,
   Plus,
+  Sun,
   LogOut,
   MoreHorizontal,
   Pencil,
@@ -76,7 +79,7 @@ interface SidebarProps {
 type Target = { type: 'workspace' | 'board'; id: string };
 type PendingDelete = Target & { name: string };
 
-const buildVersion = "202609282309";
+const buildVersion = "202609282348";
 
 function IconTip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -145,6 +148,13 @@ export function Sidebar({
   const [draft, setDraft] = useState('');
   const [pendingDelete, setPendingDelete] = useState<PendingDelete | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [theme, setTheme] = useState<Theme>(() => (document.documentElement.classList.contains('dark') ? 'dark' : 'light'));
+
+  const toggleTheme = () => {
+    const next: Theme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    applyTheme(next);
+  };
   const [wsSwitcherOpen, setWsSwitcherOpen] = useState(false);
 
   const activeWorkspace = workspaces.find((w) => w.id === activeWorkspaceId) ?? workspaces[0] ?? null;
@@ -219,7 +229,7 @@ export function Sidebar({
           </IconTip>
           {activeWorkspace && (
             <IconTip label={`Workspace: ${activeWorkspace.name}`}>
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-[#F2F1ED] text-xs font-semibold text-foreground">
+              <span className="flex h-9 w-9 items-center justify-center rounded-md kala-surface-note text-xs font-semibold text-foreground">
                 {activeWorkspace.name.slice(0, 2).toUpperCase()}
               </span>
             </IconTip>
@@ -236,6 +246,11 @@ export function Sidebar({
           )}
         </div>
         <div className="flex flex-col items-center gap-1">
+          <IconTip label={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}>
+            <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}>
+              <Sun className="h-4 w-4" />
+            </Button>
+          </IconTip>
           <IconTip label="Settings">
             <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground" onClick={() => setSettingsOpen(true)} aria-label="Open settings">
               <Settings className="h-4 w-4" />
@@ -406,7 +421,7 @@ export function Sidebar({
                     <div
                       className={cn(
                         'flex flex-1 items-center rounded-md py-0.5 pl-2 pr-1 transition-colors',
-                        isActive ? 'bg-[#F2F0EB]' : 'hover:bg-muted/60'
+                        isActive ? 'kala-surface-active' : 'hover:bg-muted/60'
                       )}
                     >
                       <button
@@ -467,7 +482,7 @@ export function Sidebar({
                       title={board.owner ? `Owned by ${displayName(board.owner)} · ${ROLE_LABELS[board.role]}` : ROLE_LABELS[board.role]}
                       className={cn(
                         'flex w-full items-center gap-2 rounded-md py-0.5 pl-2 pr-2 transition-colors',
-                        isActive ? 'bg-[#F2F0EB]' : 'hover:bg-muted/60'
+                        isActive ? 'kala-surface-active' : 'hover:bg-muted/60'
                       )}
                     >
                       <span className="flex min-w-0 flex-1 items-center gap-2 rounded px-1.5 py-1.5 text-left">
@@ -579,6 +594,14 @@ export function Sidebar({
             <Settings className="h-3.5 w-3.5" aria-hidden />
             Settings
           </button>
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}
+          >
+            {theme === 'dark' ? <Sun className="h-3.5 w-3.5" aria-hidden /> : <Moon className="h-3.5 w-3.5" aria-hidden />}
+          </button>
           {onLogout && (
             <button
               onClick={onLogout}
@@ -666,7 +689,7 @@ function SettingsDialog({
                 </div>
               ))}
             </dl>
-            <div className="rounded-lg bg-[#F2F1ED] p-3 text-xs leading-relaxed text-muted-foreground">
+            <div className="rounded-lg kala-surface-note p-3 text-xs leading-relaxed text-muted-foreground">
               Kala uses a calm charcoal + coral + sage palette. Boards stay lightly styled on purpose:
               white cards, subtle borders and restrained shadows keep the focus on your work.
             </div>

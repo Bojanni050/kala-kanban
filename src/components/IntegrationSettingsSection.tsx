@@ -144,7 +144,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
 
           {/* What this server has configured */}
           {providers.length === 0 ? (
-            <div className="rounded-md bg-[#F2F1ED] p-2.5 text-[11px] leading-relaxed text-muted-foreground">
+            <div className="rounded-md kala-surface-note p-2.5 text-[11px] leading-relaxed text-muted-foreground">
               No integrations are configured on this server yet. An administrator enables one with the
               <code className="mx-1 rounded bg-white px-1 py-0.5">INTEGRATION_&lt;PROVIDER&gt;_*</code>
               environment variables &mdash; see the README&rsquo;s Integration API section.
@@ -152,7 +152,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
           ) : (
             <ul className="space-y-1.5" aria-label="Configured providers">
               {providers.map((p) => (
-                <li key={p.provider} className="rounded-md bg-[#F5F4F1] px-2.5 py-2">
+                <li key={p.provider} className="rounded-md kala-surface-subtle px-2.5 py-2">
                   <div className="flex items-center gap-2">
                     <span
                       className={`h-1.5 w-1.5 shrink-0 rounded-full ${p.enabled ? 'bg-[#7FA693]' : 'bg-[#C9C5BA]'}`}
@@ -257,7 +257,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
             ) : (
               <ul className="space-y-1.5" aria-label="Your integration keys">
                 {keys.map((key) => (
-                  <li key={key.id} className="flex items-center gap-2 rounded-md bg-[#F5F4F1] px-2.5 py-2">
+                  <li key={key.id} className="flex items-center gap-2 rounded-md kala-surface-subtle px-2.5 py-2">
                     <div className={`min-w-0 flex-1 ${key.revoked ? 'opacity-60' : ''}`}>
                       <p className="truncate text-xs font-medium text-foreground">
                         {key.name}

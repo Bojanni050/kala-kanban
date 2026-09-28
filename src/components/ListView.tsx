@@ -243,7 +243,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 bg-white/80 text-muted-foreground hover:text-foreground"
+                className="h-6 w-6 bg-card/80 text-muted-foreground hover:text-foreground"
                 onClick={(e) => { e.stopPropagation(); handleEditOpen(); }}
                 aria-label={`Rename card ${card.title}`}
               >
@@ -254,7 +254,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 bg-white/80 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                className="h-6 w-6 bg-card/80 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                 onClick={(e) => { e.stopPropagation(); setConfirmOpen(true); }}
                 aria-label={`Delete card ${card.title}`}
               >
@@ -524,12 +524,12 @@ export function ListView({
       {/* Cards */}
       <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-2.5 py-1">
         {list.cards.length === 0 && !isFiltered && !isAddingCard && (
-          <p className="rounded-lg border border-dashed border-[#D8D5CD] bg-white/50 px-3 py-4 text-center text-xs text-muted-foreground">
+          <p className="rounded-lg border border-dashed border-[#D8D5CD] bg-card/50 px-3 py-4 text-center text-xs text-muted-foreground">
             No cards yet.
           </p>
         )}
         {list.cards.length === 0 && isFiltered && (
-          <div className="my-1 rounded-lg border border-dashed border-[#D8D5CD] bg-white/50">
+          <div className="my-1 rounded-lg border border-dashed border-[#D8D5CD] bg-card/50">
             <EmptyState compact icon={<CheckSquare className="h-4 w-4" />} title="No matching cards" description="Try adjusting your search or filters." />
           </div>
         )}

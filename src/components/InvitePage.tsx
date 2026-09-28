@@ -59,7 +59,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAF8] px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center kala-surface px-4">
       <div className="mb-6 flex flex-col items-center gap-3 text-center">
         <KalaLogo size={48} />
         <h1 className="text-xl font-bold tracking-[0.14em] text-foreground">KALA</h1>
@@ -80,7 +80,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2 rounded-lg border bg-[#F5F4F1] p-3 text-sm" style={{ borderColor: 'var(--kala-line)' }}>
+              <div className="space-y-2 rounded-lg border kala-surface-subtle p-3 text-sm" style={{ borderColor: 'var(--kala-line)' }}>
                 <div className="flex justify-between gap-4">
                   <span className="text-muted-foreground">Board</span>
                   <span className="font-medium text-foreground">{invitation.board.name}</span>
@@ -102,7 +102,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
                 <Button className="flex-1 bg-[#2A2F36] text-white hover:bg-[#1E2329]" onClick={accept} disabled={busy}>
                   {busy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : 'Accept'}
                 </Button>
-                <Button variant="outline" className="flex-1 bg-[#fdfdfc]" onClick={decline} disabled={busy}>
+                <Button variant="outline" className="flex-1 kala-surface" onClick={decline} disabled={busy}>
                   Decline
                 </Button>
               </div>
@@ -119,7 +119,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
                 You are signed in as <span className="font-medium text-foreground">{user.email}</span>. An
                 invitation can only be used by the email address it was sent to.
               </p>
-              <Button variant="outline" className="w-full bg-[#fdfdfc]" onClick={onDone}>
+              <Button variant="outline" className="w-full kala-surface" onClick={onDone}>
                 Go to my boards
               </Button>
             </CardContent>

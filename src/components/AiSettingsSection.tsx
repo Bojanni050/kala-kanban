@@ -193,12 +193,12 @@ export function AiSettingsSection({ active }: { active: boolean }) {
             />
             {modelsError && <p className="text-[11px] text-destructive">{modelsError}</p>}
             {models && (
-              <div className="max-h-36 overflow-y-auto rounded-md border bg-[#fdfdfc]" style={line} role="listbox" aria-label="Available models">
+              <div className="max-h-36 overflow-y-auto rounded-md border kala-surface" style={line} role="listbox" aria-label="Available models">
                 {filteredModels.length === 0 ? (
                   <p className="px-2 py-1.5 text-[11px] text-muted-foreground">No model matches &ldquo;{modelFilter}&rdquo;. You can still use it as typed.</p>
                 ) : (
                   filteredModels.map((m) => (
-                    <button key={m} type="button" role="option" aria-selected={m === model} onClick={() => setModel(m)} className="block w-full truncate px-2 py-1 text-left text-xs hover:bg-[#FAFAF8]">
+                    <button key={m} type="button" role="option" aria-selected={m === model} onClick={() => setModel(m)} className="block w-full truncate px-2 py-1 text-left text-xs hover:kala-surface">
                       {m}
                     </button>
                   ))

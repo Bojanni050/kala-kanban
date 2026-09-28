@@ -22,9 +22,9 @@ export function BoardSkeleton() {
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-5 w-6 rounded-full" />
             </div>
-            <Skeleton className="h-16 w-full rounded-lg bg-[#fdfdfc]" />
-            <Skeleton className="h-20 w-full rounded-lg bg-[#fdfdfc]" />
-            <Skeleton className="h-14 w-5/6 rounded-lg bg-[#fdfdfc]" />
+            <Skeleton className="h-16 w-full rounded-lg kala-surface" />
+            <Skeleton className="h-20 w-full rounded-lg kala-surface" />
+            <Skeleton className="h-14 w-5/6 rounded-lg kala-surface" />
           </div>
         ))}
       </div>
@@ -52,7 +52,7 @@ export function SidebarSkeleton() {
 
 export function AppLoadingShell() {
   return (
-    <div className="flex h-screen overflow-hidden bg-[#FAFAF8]">
+    <div className="flex h-screen overflow-hidden kala-surface">
       <SidebarSkeleton />
       <main className="flex-1 overflow-hidden">
         <BoardSkeleton />

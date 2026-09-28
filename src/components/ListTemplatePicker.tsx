@@ -63,7 +63,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
 
   return (
     <Dialog open={open} onOpenChange={(o) => !creating && onOpenChange(o)}>
-      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-lg flex-col bg-[#fdfdfc]">
+      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-lg flex-col kala-surface">
         <DialogHeader className="text-left">
           <DialogTitle>Board templates</DialogTitle>
           <DialogDescription>
@@ -130,7 +130,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
         </div>
 
         {selected && (
-          <div className="rounded-lg border bg-[#FAFAF8] p-3" style={{ borderColor: 'var(--kala-line)' }} aria-label={`${selected.name} template preview`}>
+          <div className="rounded-lg border kala-surface p-3" style={{ borderColor: 'var(--kala-line)' }} aria-label={`${selected.name} template preview`}>
             <p className="text-[11px] font-semibold text-foreground">{selected.name}</p>
             <dl className="mt-1.5 space-y-1">
               {templateMeta(selected).map(({ label, names }) =>
@@ -153,7 +153,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
               {selected.lists.length} lists · {(selected.labels ?? []).length} labels · {(selected.swimlanes ?? []).length} swimlanes · {(selected.cardTypes ?? []).length} card types
             </p>
           )}
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={creating} className="bg-[#fdfdfc]">
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={creating} className="kala-surface">
             Cancel
           </Button>
           <Button

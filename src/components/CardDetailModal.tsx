@@ -534,7 +534,7 @@ export function CardDetailModal({
                       className={cn(
                         'rounded-lg border border-transparent p-3 text-sm leading-relaxed transition-colors',
                         readOnly ? 'bg-muted/30 text-foreground' : 'cursor-pointer',
-                        description ? 'whitespace-pre-wrap bg-[#F5F4F1] text-foreground hover:bg-[#EFEEE9]' : 'border-dashed bg-muted/20 italic text-muted-foreground hover:bg-muted/40'
+                        description ? 'whitespace-pre-wrap kala-surface-subtle text-foreground hover:bg-[#EFEEE9]' : 'border-dashed bg-muted/20 italic text-muted-foreground hover:bg-muted/40'
                       )}
                       style={description ? undefined : { borderColor: 'var(--kala-line)' }}
                     >
@@ -588,7 +588,7 @@ export function CardDetailModal({
                   )}
                   <div className="pt-1">
                     {isAddingChecklistItem ? (
-                      <div className="space-y-2 rounded-lg border bg-[#FAFAF8] p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
+                      <div className="space-y-2 rounded-lg border kala-surface p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
                         <Input ref={newItemInputRef} value={newItemTitle} onChange={(e) => setNewItemTitle(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') handleAddChecklistItemSubmit(); if (e.key === 'Escape') { setIsAddingChecklistItem(false); setNewItemTitle(''); } }}
                           placeholder="Add an item..." aria-label="New checklist item" className="h-8 bg-white text-[13px]" />
@@ -609,11 +609,11 @@ export function CardDetailModal({
                 <section aria-label="Activity" className="space-y-2.5 border-t pt-5" style={{ borderColor: 'var(--kala-line)' }}>
                   <SectionTitle icon={History}>Activity</SectionTitle>
                   <ul className="space-y-2 text-[13px]">
-                    <li className="flex items-center justify-between rounded-lg bg-[#F5F4F1] px-3 py-2">
+                    <li className="flex items-center justify-between rounded-lg kala-surface-subtle px-3 py-2">
                       <span className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" aria-hidden /> Created</span>
                       <span className="font-medium text-foreground/80">{formatDateTime(card.createdAt)}</span>
                     </li>
-                    <li className="flex items-center justify-between rounded-lg bg-[#F5F4F1] px-3 py-2">
+                    <li className="flex items-center justify-between rounded-lg kala-surface-subtle px-3 py-2">
                       <span className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" aria-hidden /> Last updated</span>
                       <span className="font-medium text-foreground/80">{formatDateTime(card.updatedAt)}</span>
                     </li>
@@ -637,7 +637,7 @@ export function CardDetailModal({
                                       : null;
                       if (!text) return null;
                       return (
-                        <li key={entry.id} className="flex items-center justify-between rounded-lg bg-[#F5F4F1] px-3 py-2">
+                        <li key={entry.id} className="flex items-center justify-between rounded-lg kala-surface-subtle px-3 py-2">
                           <span className="flex min-w-0 items-center gap-1.5 text-muted-foreground"><UserRound className="h-3.5 w-3.5 shrink-0" aria-hidden /> {text}</span>
                           <span className="shrink-0 pl-2 font-medium text-foreground/80">{formatDateTime(entry.createdAt)}</span>
                         </li>
@@ -651,7 +651,7 @@ export function CardDetailModal({
               </div>
 
               {/* Side column */}
-              <aside className="space-y-5 bg-[#FAFAF8] p-5" aria-label="Card settings">
+              <aside className="space-y-5 kala-surface p-5" aria-label="Card settings">
                 {/* 3 — Labels */}
                 <section className="space-y-1.5" aria-label="Labels">
                   <h3 className="kala-section-label flex items-center gap-1.5"><Tag className="h-3.5 w-3.5" aria-hidden />Labels</h3>
@@ -882,7 +882,7 @@ export function CardDetailModal({
                       {(card.externalReferences ?? []).map((ref) => {
                         const label = providerLabel(ref.provider);
                         return (
-                          <li key={ref.id} className="rounded-lg bg-[#F5F4F1] px-3 py-2">
+                          <li key={ref.id} className="rounded-lg kala-surface-subtle px-3 py-2">
                             <p className="truncate text-xs font-medium text-foreground" title={label}>{label}</p>
                             <p className="truncate text-[10px] text-muted-foreground" title={ref.externalId}>{ref.externalId}</p>
                             {ref.externalUrl && (
