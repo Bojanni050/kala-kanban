@@ -34,15 +34,15 @@ function SectionPreview({ label, names }: { label: string; names: string[] }) {
   const hidden = names.length - shown.length;
   return (
     <span className="mt-1.5 block">
-      <span className="block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</span>
+      <span className="block text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</span>
       <span className="mt-0.5 flex flex-wrap items-center gap-1" aria-label={`${label}: ${names.join(', ')}`}>
         {shown.map((name) => (
-          <span key={name} className="inline-flex max-w-full truncate rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+          <span key={name} className="inline-flex max-w-full truncate rounded bg-muted px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground">
             {name}
           </span>
         ))}
         {hidden > 0 && (
-          <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-muted-foreground">
+          <span className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-muted-foreground">
             <ArrowRight className="h-2.5 w-2.5" aria-hidden />
             {hidden} more
           </span>
@@ -102,10 +102,10 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
                     <Check className="h-3 w-3" />
                   </span>
                 )}
-                <span className="block pr-6 text-[13px] font-semibold text-foreground">{template.name}</span>
-                <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">{template.description}</span>
-                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] font-semibold text-muted-foreground">
-                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] font-semibold text-muted-foreground">
+                <span className="block pr-6 text-[15px] font-semibold text-foreground">{template.name}</span>
+                <span className="mt-0.5 block text-[13px] leading-snug text-muted-foreground">{template.description}</span>
+                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] font-semibold text-muted-foreground">
+                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] font-semibold text-muted-foreground">
                   {meta.map(({ label, names }, i) => (
                     <span key={label} className="inline-flex items-center gap-1">
                       {i > 0 && <span aria-hidden>·</span>}
@@ -131,13 +131,13 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
 
         {selected && (
           <div className="rounded-lg border kala-surface p-3" style={{ borderColor: 'var(--kala-line)' }} aria-label={`${selected.name} template preview`}>
-            <p className="text-[11px] font-semibold text-foreground">{selected.name}</p>
+            <p className="text-[13px] font-semibold text-foreground">{selected.name}</p>
             <dl className="mt-1.5 space-y-1">
               {templateMeta(selected).map(({ label, names }) =>
                 names.length === 0 ? null : (
                   <div key={label} className="flex items-baseline gap-2">
-                    <dt className="w-16 shrink-0 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</dt>
-                    <dd className="min-w-0 text-[11px] leading-snug text-muted-foreground">
+                    <dt className="w-16 shrink-0 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</dt>
+                    <dd className="min-w-0 text-[13px] leading-snug text-muted-foreground">
                       {label === 'Lists' ? names.join(' → ') : names.join(' · ')}
                     </dd>
                   </div>

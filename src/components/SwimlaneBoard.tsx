@@ -239,7 +239,7 @@ export function SwimlaneBoard({
               <button
                 type="button"
                 onClick={() => toggleCollapse(swimlane.id)}
-                className="flex min-w-0 flex-1 items-center gap-1 rounded px-0.5 py-0.5 text-left text-[13px] font-semibold text-foreground hover:bg-black/[0.04]"
+                className="flex min-w-0 flex-1 items-center gap-1 rounded px-0.5 py-0.5 text-left text-[15px] font-semibold text-foreground hover:bg-black/[0.04]"
                 aria-expanded={!isCollapsed}
                 aria-label={`${isCollapsed ? 'Expand' : 'Collapse'} swimlane ${swimlane.name}`}
               >
@@ -251,13 +251,13 @@ export function SwimlaneBoard({
                 <span className="truncate">{swimlane.name}</span>
               </button>
             ) : (
-              <span className="flex min-w-0 flex-1 items-center gap-1 px-0.5 py-0.5 text-[13px] font-semibold text-muted-foreground">
+              <span className="flex min-w-0 flex-1 items-center gap-1 px-0.5 py-0.5 text-[15px] font-semibold text-muted-foreground">
                 <span className="h-3.5 w-3.5 shrink-0" aria-hidden />
                 <span className="truncate">Unassigned</span>
               </span>
             )}
             <span
-              className="inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-black/[0.06] px-1.5 text-[11px] font-semibold text-muted-foreground"
+              className="inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-black/[0.06] px-1.5 text-[13px] font-semibold text-muted-foreground"
               aria-label={`${count} cards`}
             >
               {count}
@@ -319,7 +319,7 @@ export function SwimlaneBoard({
                 aria-label={`${swimlane ? swimlane.name : 'Unassigned'} / ${list.title}`}
               >
                 {cellCards.length === 0 && isFiltered ? (
-                  <p className="px-2 py-3 text-center text-[11px] text-muted-foreground/70">No matching cards</p>
+                  <p className="px-2 py-3 text-center text-[13px] text-muted-foreground/70">No matching cards</p>
                 ) : (
                   <ul className="space-y-1.5">
                     {cellCards.map((card, index) => (
@@ -372,10 +372,10 @@ export function SwimlaneBoard({
                       }}
                       placeholder="Card title..."
                       aria-label={`New card title in ${list.title}`}
-                      className="h-8 border-0 bg-transparent px-1.5 text-[13px] shadow-none focus-visible:ring-1"
+                      className="h-8 border-0 bg-transparent px-1.5 text-[15px] shadow-none focus-visible:ring-1"
                       maxLength={255}
                     />
-                    <Button size="sm" className="h-7 shrink-0 bg-[#2A2F36] px-2.5 text-[11px] text-white hover:bg-[#1E2329]" onClick={() => handleAddCardInCell(list.id)}>
+                    <Button size="sm" className="h-7 shrink-0 bg-[#2A2F36] px-2.5 text-[13px] text-white hover:bg-[#1E2329]" onClick={() => handleAddCardInCell(list.id)}>
                       Add
                     </Button>
                     <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" aria-label="Cancel adding card" onClick={() => { setAddingCell(null); setNewCardTitle(''); }}>
@@ -386,7 +386,7 @@ export function SwimlaneBoard({
                 {canEdit && addingCell !== dropKey(list.id) && !isCollapsed && (
                   <button
                     onClick={() => { setAddingCell(dropKey(list.id)); setNewCardTitle(''); }}
-                    className="mt-1 flex w-full items-center gap-1 rounded px-1 py-1 text-[11px] font-medium text-muted-foreground/80 transition-colors hover:bg-black/[0.05] hover:text-foreground"
+                    className="mt-1 flex w-full items-center gap-1 rounded px-1 py-1 text-[13px] font-medium text-muted-foreground/80 transition-colors hover:bg-black/[0.05] hover:text-foreground"
                     aria-label={`Add a card to ${swimlane ? swimlane.name : 'Unassigned'} / ${list.title}`}
                   >
                     <Plus className="h-3.5 w-3.5" aria-hidden /> Add card
@@ -409,7 +409,7 @@ export function SwimlaneBoard({
             {list.color && (
               <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: list.color }} aria-hidden />
             )}
-            <p className="min-w-0 flex-1 truncate text-[13px] font-semibold text-foreground">{list.title}</p>
+            <p className="min-w-0 flex-1 truncate text-[15px] font-semibold text-foreground">{list.title}</p>
             {onSetListColor && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -419,7 +419,7 @@ export function SwimlaneBoard({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <div className="px-2 py-1.5">
-                    <p className="mb-1 flex items-center gap-2 text-[11px] font-medium text-muted-foreground">
+                    <p className="mb-1 flex items-center gap-2 text-[13px] font-medium text-muted-foreground">
                       <Palette className="h-3 w-3" aria-hidden /> List color
                     </p>
                     <div className="flex flex-wrap items-center gap-1.5">
@@ -428,7 +428,7 @@ export function SwimlaneBoard({
                         onClick={() => onSetListColor(list.id, null)}
                         aria-label="Remove list color"
                         title="No color"
-                        className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[10px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
+                        className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[12px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
                       >
                         <X className="h-3 w-3" aria-hidden />
                       </button>
@@ -474,7 +474,7 @@ export function SwimlaneBoard({
                 }}
                 placeholder="Swimlane name..."
                 aria-label="New swimlane name"
-                className="h-8 border bg-white text-[13px]"
+                className="h-8 border bg-white text-[15px]"
                 maxLength={100}
               />
               <Button size="sm" onClick={handleAddSwimlane} className="h-8 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">
@@ -496,7 +496,7 @@ export function SwimlaneBoard({
           ) : (
             <button
               onClick={() => setIsAdding(true)}
-              className="flex items-center gap-1.5 rounded-lg border border-dashed bg-white/60 px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
+              className="flex items-center gap-1.5 rounded-lg border border-dashed bg-white/60 px-3 py-2 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
               style={{ borderColor: 'var(--kala-line)' }}
             >
               <Plus className="h-4 w-4" aria-hidden /> Add swimlane

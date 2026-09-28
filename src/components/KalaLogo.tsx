@@ -22,8 +22,8 @@ export function KalaLogo({ size = 32, withWordmark = false }: { size?: number; w
       </span>
       {withWordmark && (
         <span className="flex flex-col leading-none">
-          <span className="text-[15px] font-bold tracking-[0.14em] text-foreground">KALA</span>
-          <span className="mt-1 text-[9px] font-medium tracking-[0.18em] text-muted-foreground">
+          <span className="text-[17px] font-bold tracking-[0.14em] text-foreground">KALA</span>
+          <span className="mt-1 text-[11px] font-medium tracking-[0.18em] text-muted-foreground">
             KANBAN & FLOW
           </span>
         </span>

@@ -136,7 +136,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
         {card.cardType && (
           <div className="mb-1.5 flex flex-wrap items-center gap-1">
             <span
-              className="inline-flex max-w-full items-center truncate rounded px-1.5 py-px text-[10px] font-semibold tracking-wide text-[#2A2F36]"
+              className="inline-flex max-w-full items-center truncate rounded px-1.5 py-px text-[12px] font-semibold tracking-wide text-[#2A2F36]"
               style={{ backgroundColor: `${card.cardType.color}26`, boxShadow: `inset 0 0 0 1px ${card.cardType.color}59` }}
               title={`Type: ${card.cardType.name}`}
             >
@@ -150,7 +150,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
               <span
                 key={label.id}
                 style={{ backgroundColor: label.color }}
-                className="inline-flex max-w-full items-center truncate rounded px-1.5 py-px text-[10px] font-semibold tracking-wide text-white"
+                className="inline-flex max-w-full items-center truncate rounded px-1.5 py-px text-[12px] font-semibold tracking-wide text-white"
               >
                 {label.name}
               </span>
@@ -158,9 +158,9 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
           </div>
         )}
 
-        <p className="pr-12 text-[13px] font-medium leading-snug text-foreground">{card.title}</p>
+        <p className="pr-12 text-[15px] font-medium leading-snug text-foreground">{card.title}</p>
         {card.description && (
-          <p className="mt-1 line-clamp-2 whitespace-pre-line pr-6 text-[11px] leading-snug text-muted-foreground">
+          <p className="mt-1 line-clamp-2 whitespace-pre-line pr-6 text-[13px] leading-snug text-muted-foreground">
             {card.description.length > 100 ? `${card.description.slice(0, 100).trimEnd()}…` : card.description}
           </p>
         )}
@@ -170,11 +170,11 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
             {card.dueDate && (
               <span
                 className={cn(
-                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-medium',
+                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[13px] font-medium',
                   isOverdue()
-                    ? 'border-[#EAC5B8] bg-[#FAECE6] text-[#9A4A30]'
+                    ? 'border-[#EAC5B8] bg-[#FAECE6] text-[#9A4A30] dark:border-[#8a4a35] dark:bg-[#3a2721] dark:text-[#e8a48c]'
                     : isDueTodayCard()
-                      ? 'border-[#E8D9B8] bg-[#FAF3E2] text-[#7A5F1F]'
+                      ? 'border-[#E8D9B8] bg-[#FAF3E2] text-[#7A5F1F] dark:border-[#8a7433] dark:bg-[#38321f] dark:text-[#e2c276]'
                       : 'border-border bg-muted/70 text-muted-foreground'
                 )}
                 title={`Due: ${format(new Date(card.dueDate), 'PPP')}`}
@@ -187,10 +187,10 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
             {card.priority && (
               <span
                 className={cn(
-                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-medium',
-                  card.priority === 'HIGH' && 'border-[#EAC5B8] bg-[#FAECE6] text-[#9A4A30]',
-                  card.priority === 'MEDIUM' && 'border-[#E8D9B8] bg-[#FAF3E2] text-[#7A5F1F]',
-                  card.priority === 'LOW' && 'border-[#C9DCD2] bg-[#EDF4F0] text-[#3E6355]'
+                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[13px] font-medium',
+                  card.priority === 'HIGH' && 'border-[#EAC5B8] bg-[#FAECE6] text-[#9A4A30] dark:border-[#8a4a35] dark:bg-[#3a2721] dark:text-[#e8a48c]',
+                  card.priority === 'MEDIUM' && 'border-[#E8D9B8] bg-[#FAF3E2] text-[#7A5F1F] dark:border-[#8a7433] dark:bg-[#38321f] dark:text-[#e2c276]',
+                  card.priority === 'LOW' && 'border-[#C9DCD2] bg-[#EDF4F0] text-[#3E6355] dark:border-[#3f5a4e] dark:bg-[#20302a] dark:text-[#9cc4b0]'
                 )}
                 title={`Priority: ${card.priority.charAt(0) + card.priority.slice(1).toLowerCase()}`}
               >
@@ -202,9 +202,9 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
             {checklist.length > 0 && (
               <span
                 className={cn(
-                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[11px] font-medium',
+                  'inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[13px] font-medium',
                   completed === checklist.length
-                    ? 'border-[#C9DCD2] bg-[#EDF4F0] text-[#3E6355]'
+                    ? 'border-[#C9DCD2] bg-[#EDF4F0] text-[#3E6355] dark:border-[#3f5a4e] dark:bg-[#20302a] dark:text-[#9cc4b0]'
                     : 'border-border bg-muted/70 text-muted-foreground'
                 )}
                 title={`Checklist: ${completed} of ${checklist.length} completed`}
@@ -221,7 +221,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
             )}
             {externalSource && (
               <span
-                className="inline-flex items-center gap-1 rounded-md border border-border bg-muted/50 px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground"
+                className="inline-flex items-center gap-1 rounded-md border border-border bg-muted/50 px-1.5 py-0.5 text-[13px] font-medium text-muted-foreground"
                 title={`Source: ${providerLabel(externalSource.provider)}`}
                 aria-label={`Source: ${providerLabel(externalSource.provider)}`}
               >
@@ -448,7 +448,7 @@ export function ListView({
               if (e.key === 'Escape') { setListTitle(list.title); setIsEditingTitle(false); }
             }}
             aria-label="List title"
-            className="h-7 border bg-white px-1.5 text-[13px] font-semibold shadow-none"
+            className="h-7 border bg-white px-1.5 text-[15px] font-semibold shadow-none"
             maxLength={100}
           />
         ) : (
@@ -457,7 +457,7 @@ export function ListView({
             title={readOnly ? list.title : 'Rename list'}
             aria-label={readOnly ? `List: ${list.title}` : `Rename list ${list.title}`}
             className={cn(
-              'min-w-0 flex-1 truncate rounded px-1 py-0.5 text-left text-[13px] font-semibold text-foreground',
+              'min-w-0 flex-1 truncate rounded px-1 py-0.5 text-left text-[15px] font-semibold text-foreground',
               !readOnly && 'hover:bg-black/[0.04]'
             )}
           >
@@ -468,7 +468,7 @@ export function ListView({
           </button>
         )}
         <span
-          className="inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-black/[0.06] px-1.5 text-[11px] font-semibold text-muted-foreground"
+          className="inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-black/[0.06] px-1.5 text-[13px] font-semibold text-muted-foreground"
           aria-label={`${list.cards.length} cards`}
         >
           {list.cards.length}
@@ -486,7 +486,7 @@ export function ListView({
               </DropdownMenuItem>
               {onSetListColor && (
                 <div className="px-2 py-1.5">
-                  <p className="mb-1 flex items-center gap-2 text-[11px] font-medium text-muted-foreground">
+                  <p className="mb-1 flex items-center gap-2 text-[13px] font-medium text-muted-foreground">
                     <Palette className="h-3 w-3" aria-hidden /> List color
                   </p>
                   <div className="flex flex-wrap items-center gap-1.5">
@@ -495,7 +495,7 @@ export function ListView({
                       onClick={() => onSetListColor(list.id, null)}
                       aria-label="Remove list color"
                       title="No color"
-                      className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[10px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
+                      className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[12px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
                     >
                       <X className="h-3 w-3" aria-hidden />
                     </button>
@@ -595,7 +595,7 @@ export function ListView({
                 }}
                 placeholder="Enter card title..."
                 aria-label={`New card title in ${list.title}`}
-                className="h-8 border-0 bg-transparent px-2 text-[13px] shadow-none focus-visible:ring-1"
+                className="h-8 border-0 bg-transparent px-2 text-[15px] shadow-none focus-visible:ring-1"
                 maxLength={255}
               />
               <div className="flex items-center gap-1.5 px-1 pb-1">
@@ -605,14 +605,14 @@ export function ListView({
                 <Button variant="ghost" size="icon" className="h-7 w-7" aria-label="Cancel adding card" onClick={() => { setIsAddingCard(false); setNewCardTitle(''); }}>
                   <X className="h-4 w-4" />
                 </Button>
-                <span className="ml-auto hidden text-[11px] text-muted-foreground lg:inline">Enter to add</span>
+                <span className="ml-auto hidden text-[13px] text-muted-foreground lg:inline">Enter to add</span>
               </div>
             </div>
           ) : (
             <button
               onClick={() => setIsAddingCard(true)}
               aria-label={`Add a card to ${list.title}`}
-              className="flex w-full items-center gap-1.5 rounded-lg px-2 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] hover:text-foreground focus-visible:outline-none"
+              className="flex w-full items-center gap-1.5 rounded-lg px-2 py-2 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-black/[0.05] hover:text-foreground focus-visible:outline-none"
             >
               <Plus className="h-4 w-4" aria-hidden />
               Add a card

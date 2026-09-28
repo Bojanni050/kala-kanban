@@ -162,7 +162,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
                 {settings.providers.map((p) => <SelectItem key={p.id} value={p.id}>{p.label}</SelectItem>)}
               </SelectContent>
             </Select>
-            {current?.openaiCompatible && <p className="text-[11px] text-muted-foreground">Uses the OpenAI-compatible API.</p>}
+            {current?.openaiCompatible && <p className="text-[13px] text-muted-foreground">Uses the OpenAI-compatible API.</p>}
           </div>
 
           <div className="space-y-1.5">
@@ -173,7 +173,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
                 onClick={() => void browseModels()}
                 disabled={!canBrowse || loadingModels}
                 title={canBrowse ? undefined : 'Save an API key for this provider first'}
-                className="text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground disabled:cursor-not-allowed disabled:no-underline disabled:opacity-50"
+                className="text-[13px] text-muted-foreground underline underline-offset-2 hover:text-foreground disabled:cursor-not-allowed disabled:no-underline disabled:opacity-50"
               >
                 {loadingModels ? 'Loading models…' : models ? 'Reload models' : 'Browse models'}
               </button>
@@ -191,14 +191,14 @@ export function AiSettingsSection({ active }: { active: boolean }) {
               spellCheck={false}
               className="h-9 bg-white text-sm"
             />
-            {modelsError && <p className="text-[11px] text-destructive">{modelsError}</p>}
+            {modelsError && <p className="text-[13px] text-destructive">{modelsError}</p>}
             {models && (
               <div className="max-h-36 overflow-y-auto rounded-md border kala-surface" style={line} role="listbox" aria-label="Available models">
                 {filteredModels.length === 0 ? (
-                  <p className="px-2 py-1.5 text-[11px] text-muted-foreground">No model matches &ldquo;{modelFilter}&rdquo;. You can still use it as typed.</p>
+                  <p className="px-2 py-1.5 text-[13px] text-muted-foreground">No model matches &ldquo;{modelFilter}&rdquo;. You can still use it as typed.</p>
                 ) : (
                   filteredModels.map((m) => (
-                    <button key={m} type="button" role="option" aria-selected={m === model} onClick={() => setModel(m)} className="block w-full truncate px-2 py-1 text-left text-xs hover:kala-surface">
+                    <button key={m} type="button" role="option" aria-selected={m === model} onClick={() => setModel(m)} className="block w-full truncate px-2 py-1 text-left text-xs hover:bg-[#FAFAF8]">
                       {m}
                     </button>
                   ))
@@ -212,7 +212,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
               <div className="flex items-center justify-between">
                 <Label htmlFor="ai-key" className="text-xs">Your API key</Label>
                 {current?.keyHelpUrl && (
-                  <a href={current.keyHelpUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground">
+                  <a href={current.keyHelpUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[13px] text-muted-foreground underline underline-offset-2 hover:text-foreground">
                     Get a key <ExternalLink className="h-3 w-3" aria-hidden />
                   </a>
                 )}
@@ -229,7 +229,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
                 data-1p-ignore
                 className="h-9 bg-white text-sm"
               />
-              <p className="text-[11px] leading-snug text-muted-foreground">{keyNote}</p>
+              <p className="text-[13px] leading-snug text-muted-foreground">{keyNote}</p>
             </div>
           )}
 
@@ -250,7 +250,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
               </Button>
             )}
           </div>
-          <p className="text-[11px] leading-snug text-muted-foreground">
+          <p className="text-[13px] leading-snug text-muted-foreground">
             When you use Kala AI, the content of the board you are asking about is sent to the provider you choose here.
           </p>
         </>

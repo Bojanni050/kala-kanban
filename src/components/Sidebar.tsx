@@ -79,7 +79,7 @@ interface SidebarProps {
 type Target = { type: 'workspace' | 'board'; id: string };
 type PendingDelete = Target & { name: string };
 
-const buildVersion = "202609282348";
+const buildVersion = "202609282351";
 
 function IconTip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -213,13 +213,13 @@ export function Sidebar({
       placeholder={placeholder}
       aria-label={label}
       maxLength={100}
-      className="h-8 bg-white text-[13px]"
+      className="h-8 bg-card text-[15px]"
     />
   );
 
   if (collapsed) {
     return (
-      <div className="z-40 flex h-full w-14 shrink-0 flex-col items-center justify-between border-r bg-white py-3 max-md:absolute max-md:shadow-lg" style={{ borderColor: 'var(--kala-line)' }}>
+      <div className="z-40 flex h-full w-14 shrink-0 flex-col items-center justify-between border-r bg-card py-3 max-md:absolute max-md:shadow-lg" style={{ borderColor: 'var(--kala-line)' }}>
         <div className="flex flex-col items-center gap-2">
           <KalaLogo size={30} />
           <IconTip label="Expand sidebar">
@@ -238,7 +238,7 @@ export function Sidebar({
             <IconTip label={`${invitations.length} pending invitation${invitations.length > 1 ? 's' : ''}`}>
               <span className="relative flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-accent">
                 <Inbox className="h-4 w-4" />
-                <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
+                <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[11px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
                   {invitations.length}
                 </span>
               </span>
@@ -276,7 +276,7 @@ export function Sidebar({
   }
 
   return (
-    <div className="z-40 flex h-full w-64 shrink-0 flex-col border-r bg-white max-md:absolute max-md:shadow-lg" style={{ borderColor: 'var(--kala-line)' }}>
+    <div className="z-40 flex h-full w-64 shrink-0 flex-col border-r bg-card max-md:absolute max-md:shadow-lg" style={{ borderColor: 'var(--kala-line)' }}>
       {/* Brand */}
       <div className="flex items-center justify-between px-4 pb-2 pt-4">
         <KalaLogo size={32} withWordmark />
@@ -299,19 +299,19 @@ export function Sidebar({
           <Popover open={wsSwitcherOpen} onOpenChange={setWsSwitcherOpen}>
             <PopoverTrigger asChild>
               <button
-                className="flex w-full items-center gap-2 rounded-lg border bg-white px-2.5 py-2 text-left transition-colors hover:bg-muted/50"
+                className="flex w-full items-center gap-2 rounded-lg border bg-card px-2.5 py-2 text-left transition-colors hover:bg-muted/50"
                 style={{ borderColor: 'var(--kala-line)' }}
                 aria-label={activeWorkspace ? `Current workspace: ${activeWorkspace.name}. Switch workspace` : 'Select workspace'}
                 aria-haspopup="listbox"
               >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#2A2F36] text-[11px] font-bold text-white" aria-hidden>
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#2A2F36] text-[13px] font-bold text-white" aria-hidden>
                   {activeWorkspace ? activeWorkspace.name.slice(0, 2).toUpperCase() : <Briefcase className="h-3.5 w-3.5" />}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px] font-semibold text-foreground">
+                  <span className="block truncate text-[15px] font-semibold text-foreground">
                     {activeWorkspace?.name ?? 'No workspace'}
                   </span>
-                  <span className="block text-[11px] text-muted-foreground">
+                  <span className="block text-[13px] text-muted-foreground">
                     {activeWorkspace ? `${activeWorkspace.boards.length} board${activeWorkspace.boards.length === 1 ? '' : 's'}` : 'Create one to begin'}
                   </span>
                 </span>
@@ -319,7 +319,7 @@ export function Sidebar({
               </button>
             </PopoverTrigger>
             <PopoverContent align="start" className="w-60 p-1.5" sideOffset={6}>
-              <p className="px-2 pb-1 pt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <p className="px-2 pb-1 pt-1 text-[13px] font-semibold uppercase tracking-wider text-muted-foreground">
                 Switch workspace
               </p>
               <div className="max-h-56 overflow-y-auto" role="listbox">
@@ -341,10 +341,10 @@ export function Sidebar({
                           onClick={() => { onSelectWorkspace(w.id); setWsSwitcherOpen(false); }}
                           className="flex min-w-0 flex-1 items-center gap-2 px-2 py-1.5 text-left"
                         >
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#2A2F36] text-[10px] font-bold text-white" aria-hidden>
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#2A2F36] text-[12px] font-bold text-white" aria-hidden>
                             {w.name.slice(0, 2).toUpperCase()}
                           </span>
-                          <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-foreground">{w.name}</span>
+                          <span className="min-w-0 flex-1 truncate text-[15px] font-medium text-foreground">{w.name}</span>
                           {w.id === activeWorkspace?.id && <Check className="h-3.5 w-3.5 shrink-0 text-[#7FA693]" aria-label="Current workspace" />}
                         </button>
                         <RowMenu
@@ -362,7 +362,7 @@ export function Sidebar({
               ) : (
                 <button
                   onClick={() => { resetInputs(); setCreatingWorkspace(true); }}
-                  className="mt-1 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+                  className="mt-1 flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                 >
                   <Plus className="h-3.5 w-3.5" aria-hidden />
                   New workspace
@@ -430,7 +430,7 @@ export function Sidebar({
                         className="flex min-w-0 flex-1 items-center gap-2 rounded px-1.5 py-1.5 text-left"
                       >
                         <LayoutDashboard className={cn('h-3.5 w-3.5 shrink-0', isActive ? 'text-foreground' : 'text-muted-foreground')} aria-hidden />
-                        <span className={cn('truncate text-[13px]', isActive ? 'font-semibold text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
+                        <span className={cn('truncate text-[15px]', isActive ? 'font-semibold text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
                           {board.name}
                         </span>
                       </button>
@@ -449,7 +449,7 @@ export function Sidebar({
                 activeWorkspace.boards.length > 0 && (
                   <button
                     onClick={() => { resetInputs(); setAddingBoard(true); }}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-[15px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
                   >
                     <Plus className="h-3.5 w-3.5" aria-hidden />
                     Add board
@@ -462,7 +462,7 @@ export function Sidebar({
 
         {/* Shared with me */}
         <section aria-label="Shared boards" className="mt-5">
-          <p className="kala-section-label px-1 pb-1.5">Shared with me {sharedBoards.length > 0 && <span className="ml-1 rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold normal-case tracking-normal">{sharedBoards.length}</span>}</p>
+          <p className="kala-section-label px-1 pb-1.5">Shared with me {sharedBoards.length > 0 && <span className="ml-1 rounded-full bg-muted px-1.5 py-0.5 text-[12px] font-semibold normal-case tracking-normal">{sharedBoards.length}</span>}</p>
           {sharedBoards.length === 0 ? (
             <p className="px-1 text-xs leading-relaxed text-muted-foreground">
               Boards others share with you will appear here.
@@ -487,11 +487,11 @@ export function Sidebar({
                     >
                       <span className="flex min-w-0 flex-1 items-center gap-2 rounded px-1.5 py-1.5 text-left">
                         <Users className={cn('h-3.5 w-3.5 shrink-0', isActive ? 'text-foreground' : 'text-muted-foreground')} aria-hidden />
-                        <span className={cn('min-w-0 flex-1 truncate text-[13px]', isActive ? 'font-semibold text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
+                        <span className={cn('min-w-0 flex-1 truncate text-[15px]', isActive ? 'font-semibold text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
                           {board.name}
                         </span>
                       </span>
-                      <span className="shrink-0 rounded-full border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground" style={{ borderColor: 'var(--kala-line)' }}>
+                      <span className="shrink-0 rounded-full border px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground" style={{ borderColor: 'var(--kala-line)' }}>
                         {ROLE_LABELS[board.role]}
                       </span>
                     </button>
@@ -506,13 +506,13 @@ export function Sidebar({
         {invitations.length > 0 && (
           <section aria-label="Pending invitations" className="mt-5">
             <p className="kala-section-label px-1 pb-1.5">
-              Invitations <span className="ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>{invitations.length}</span>
+              Invitations <span className="ml-1 rounded-full px-1.5 py-0.5 text-[12px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>{invitations.length}</span>
             </p>
             <div className="space-y-2">
               {invitations.map((inv) => (
-                <div key={inv.token} className="rounded-lg border bg-white p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
-                  <p className="truncate text-[13px] font-semibold text-foreground">{inv.board.name}</p>
-                  <p className="truncate text-[11px] text-muted-foreground">
+                <div key={inv.token} className="rounded-lg border bg-card p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
+                  <p className="truncate text-[15px] font-semibold text-foreground">{inv.board.name}</p>
+                  <p className="truncate text-[13px] text-muted-foreground">
                     From {displayName(inv.invitedBy)} · {ROLE_LABELS[inv.role]}
                   </p>
                   <div className="mt-2 flex gap-1.5">
@@ -520,7 +520,7 @@ export function Sidebar({
                       <Check className="h-3 w-3" aria-hidden />
                       Accept
                     </Button>
-                    <Button variant="outline" size="sm" className="h-7 flex-1 gap-1 bg-white text-xs" onClick={() => onDeclineInvitation(inv.token)}>
+                    <Button variant="outline" size="sm" className="h-7 flex-1 gap-1 bg-card text-xs" onClick={() => onDeclineInvitation(inv.token)}>
                       <X className="h-3 w-3" aria-hidden />
                       Decline
                     </Button>
@@ -533,7 +533,7 @@ export function Sidebar({
       </div>
 
       {/* Bottom area: settings / profile / logout */}
-      <div className="border-t bg-white p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
+      <div className="border-t bg-card p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
         <div className="flex items-center gap-1">
           <Popover>
             <PopoverTrigger asChild>
@@ -548,25 +548,25 @@ export function Sidebar({
                 )}
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-xs font-semibold text-foreground">{user?.email ?? 'Account'}</span>
-                  <span className="block truncate text-[11px] text-muted-foreground">
+                  <span className="block truncate text-[13px] text-muted-foreground">
                     {invitations.length > 0 ? `${invitations.length} pending invite${invitations.length > 1 ? 's' : ''}` : 'View profile & invites'}
                   </span>
                 </span>
               </button>
             </PopoverTrigger>
             <PopoverContent side="top" align="start" className="w-72 p-3" sideOffset={8}>
-              <p className="text-[11px] text-muted-foreground">Signed in as</p>
+              <p className="text-[13px] text-muted-foreground">Signed in as</p>
               <p className="truncate text-sm font-semibold text-foreground">{user?.email}</p>
               <div className="mt-3 border-t pt-3" style={{ borderColor: 'var(--kala-line)' }}>
                 <p className="kala-section-label pb-2">Invitations {invitations.length > 0 && `(${invitations.length})`}</p>
                 {invitations.length === 0 ? (
-                  <p className="text-[13px] text-muted-foreground">No pending invitations.</p>
+                  <p className="text-[15px] text-muted-foreground">No pending invitations.</p>
                 ) : (
                   <div className="max-h-48 space-y-2 overflow-y-auto">
                     {invitations.map((invitation) => (
                       <div key={invitation.token} className="rounded-lg border p-2" style={{ borderColor: 'var(--kala-line)' }}>
-                        <p className="truncate text-[13px] font-medium text-foreground">{invitation.board.name}</p>
-                        <p className="truncate text-[11px] text-muted-foreground">
+                        <p className="truncate text-[15px] font-medium text-foreground">{invitation.board.name}</p>
+                        <p className="truncate text-[13px] text-muted-foreground">
                           From {displayName(invitation.invitedBy)} · {ROLE_LABELS[invitation.role]}
                         </p>
                         <div className="mt-2 flex gap-1.5">
@@ -588,7 +588,7 @@ export function Sidebar({
         <div className="mt-1 flex items-center gap-1">
           <button
             onClick={() => setSettingsOpen(true)}
-            className="flex flex-1 items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+            className="flex flex-1 items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
             aria-label="Open settings"
           >
             <Settings className="h-3.5 w-3.5" aria-hidden />
@@ -596,7 +596,7 @@ export function Sidebar({
           </button>
           <button
             onClick={toggleTheme}
-            className="flex items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+            className="flex items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}
             title={theme === 'dark' ? 'Switch to light mode' : 'Switch to night mode'}
           >
@@ -605,7 +605,7 @@ export function Sidebar({
           {onLogout && (
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+              className="flex items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
               aria-label="Log out"
               title="Log out"
             >
@@ -615,7 +615,7 @@ export function Sidebar({
           )}
         </div>
         <div className="mt-2 border-t pt-2" style={{ borderColor: 'var(--kala-line)' }}>
-          <p className="px-2 text-[11px] text-muted-foreground">
+          <p className="px-2 text-[13px] text-muted-foreground">
             build: {buildVersion}
           </p>
         </div>
@@ -685,7 +685,7 @@ function SettingsDialog({
               ].map((s) => (
                 <div key={s.v} className="rounded-lg bg-muted/60 px-2 py-3">
                   <dt className="text-lg font-bold text-foreground">{s.k}</dt>
-                  <dd className="text-[11px] text-muted-foreground">{s.v}</dd>
+                  <dd className="text-[13px] text-muted-foreground">{s.v}</dd>
                 </div>
               ))}
             </dl>

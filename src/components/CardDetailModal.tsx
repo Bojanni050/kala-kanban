@@ -443,14 +443,14 @@ export function CardDetailModal({
                         if (e.key === 'Escape') { setTitle(card.title); setIsEditingTitle(false); }
                       }}
                       aria-label="Card title"
-                      className="h-9 bg-white px-2 text-[17px] font-semibold tracking-tight"
+                      className="h-9 bg-white px-2 text-[19px] font-semibold tracking-tight"
                       placeholder="Card title..."
                       maxLength={255}
                     />
                   ) : (
                     <DialogTitle
                       onClick={() => !readOnly && setIsEditingTitle(true)}
-                      className="cursor-pointer rounded px-1.5 py-1 text-[17px] font-semibold leading-snug tracking-tight text-foreground transition-colors hover:bg-muted/60"
+                      className="cursor-pointer rounded px-1.5 py-1 text-[19px] font-semibold leading-snug tracking-tight text-foreground transition-colors hover:bg-muted/60"
                       title={readOnly ? undefined : 'Click to edit title'}
                     >
                       {title || card.title}
@@ -521,7 +521,7 @@ export function CardDetailModal({
                           <Button size="sm" onClick={handleSaveDescription} className="h-8 bg-[#2A2F36] px-3 text-xs text-white hover:bg-[#1E2329]">Save</Button>
                           <Button variant="ghost" size="sm" onClick={handleCancelDescription} className="h-8 px-3 text-xs">Cancel</Button>
                         </div>
-                        <span className="hidden text-[11px] text-muted-foreground sm:inline">Ctrl+Enter to save</span>
+                        <span className="hidden text-[13px] text-muted-foreground sm:inline">Ctrl+Enter to save</span>
                       </div>
                     </div>
                   ) : (
@@ -554,7 +554,7 @@ export function CardDetailModal({
                   {totalCount > 0 && <Progress value={progressPercent} className="h-1.5" aria-label={`Checklist ${progressPercent}% complete`} />}
                   {totalCount === 0 && !isAddingChecklistItem ? (
                     <div className="rounded-lg border border-dashed px-3 py-4 text-center" style={{ borderColor: 'var(--kala-line)' }}>
-                      <p className="text-[13px] text-muted-foreground">No checklist items yet. Break this card into smaller steps.</p>
+                      <p className="text-[15px] text-muted-foreground">No checklist items yet. Break this card into smaller steps.</p>
                     </div>
                   ) : (
                     <ul className="space-y-0.5 pt-1">
@@ -566,7 +566,7 @@ export function CardDetailModal({
                               <Input ref={editItemInputRef} value={editingItemTitle} onChange={(e) => setEditingItemTitle(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter') handleSaveChecklistItemTitle(item.id); if (e.key === 'Escape') setEditingItemId(null); }}
                                 onBlur={() => handleSaveChecklistItemTitle(item.id)}
-                                aria-label="Checklist item title" className="h-7 bg-white px-2 text-[13px]" />
+                                aria-label="Checklist item title" className="h-7 bg-white px-2 text-[15px]" />
                               <Button size="sm" className="h-7 bg-[#2A2F36] px-2 text-xs text-white hover:bg-[#1E2329]" onClick={() => handleSaveChecklistItemTitle(item.id)}>Save</Button>
                             </span>
                           ) : (
@@ -591,7 +591,7 @@ export function CardDetailModal({
                       <div className="space-y-2 rounded-lg border kala-surface p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
                         <Input ref={newItemInputRef} value={newItemTitle} onChange={(e) => setNewItemTitle(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') handleAddChecklistItemSubmit(); if (e.key === 'Escape') { setIsAddingChecklistItem(false); setNewItemTitle(''); } }}
-                          placeholder="Add an item..." aria-label="New checklist item" className="h-8 bg-white text-[13px]" />
+                          placeholder="Add an item..." aria-label="New checklist item" className="h-8 bg-white text-[15px]" />
                         <div className="flex items-center gap-2">
                           <Button size="sm" onClick={handleAddChecklistItemSubmit} disabled={!newItemTitle.trim()} className="h-7 bg-[#2A2F36] px-3 text-xs text-white hover:bg-[#1E2329]">Add</Button>
                           <Button variant="ghost" size="sm" onClick={() => { setIsAddingChecklistItem(false); setNewItemTitle(''); }} className="h-7 px-2.5 text-xs">Cancel</Button>
@@ -608,7 +608,7 @@ export function CardDetailModal({
                 {/* 6 — Activity */}
                 <section aria-label="Activity" className="space-y-2.5 border-t pt-5" style={{ borderColor: 'var(--kala-line)' }}>
                   <SectionTitle icon={History}>Activity</SectionTitle>
-                  <ul className="space-y-2 text-[13px]">
+                  <ul className="space-y-2 text-[15px]">
                     <li className="flex items-center justify-between rounded-lg kala-surface-subtle px-3 py-2">
                       <span className="flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5" aria-hidden /> Created</span>
                       <span className="font-medium text-foreground/80">{formatDateTime(card.createdAt)}</span>
@@ -659,7 +659,7 @@ export function CardDetailModal({
                     <PopoverTrigger asChild>
                       <Button variant="outline" size="sm" className="h-9 w-full justify-start bg-white px-3 text-xs" aria-label="Manage labels">
                         <Tag className="mr-2 h-3.5 w-3.5" aria-hidden /> Manage labels
-                        {(card.labels?.length ?? 0) > 0 && <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold">{card.labels?.length}</span>}
+                        {(card.labels?.length ?? 0) > 0 && <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[12px] font-semibold">{card.labels?.length}</span>}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-72 space-y-3 p-3" align="start">
@@ -697,11 +697,11 @@ export function CardDetailModal({
                         <div className="space-y-3">
                           <p className="text-center text-xs font-semibold text-foreground">Create label</p>
                           <div className="space-y-1.5">
-                            <label className="text-[11px] text-muted-foreground" htmlFor="kala-new-label">Title</label>
+                            <label className="text-[13px] text-muted-foreground" htmlFor="kala-new-label">Title</label>
                             <Input id="kala-new-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-white text-xs" autoFocus />
                           </div>
                           <div className="space-y-1.5">
-                            <span className="text-[11px] text-muted-foreground" id="kala-color-label">Color</span>
+                            <span className="text-[13px] text-muted-foreground" id="kala-color-label">Color</span>
                             <div className="grid grid-cols-5 gap-1.5" role="radiogroup" aria-labelledby="kala-color-label">
                               {LABEL_COLORS.map((c) => (
                                 <button key={c.hex} type="button" role="radio" aria-checked={labelColorInput === c.hex} aria-label={c.name} title={c.name} style={{ backgroundColor: c.hex }} onClick={() => setLabelColorInput(c.hex)}
@@ -721,11 +721,11 @@ export function CardDetailModal({
                         <div className="space-y-3">
                           <p className="text-center text-xs font-semibold text-foreground">Edit label</p>
                           <div className="space-y-1.5">
-                            <label className="text-[11px] text-muted-foreground" htmlFor="kala-edit-label">Title</label>
+                            <label className="text-[13px] text-muted-foreground" htmlFor="kala-edit-label">Title</label>
                             <Input id="kala-edit-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-white text-xs" autoFocus />
                           </div>
                           <div className="space-y-1.5">
-                            <span className="text-[11px] text-muted-foreground">Color</span>
+                            <span className="text-[13px] text-muted-foreground">Color</span>
                             <div className="grid grid-cols-5 gap-1.5">
                               {LABEL_COLORS.map((c) => (
                                 <button key={c.hex} type="button" aria-label={c.name} title={c.name} style={{ backgroundColor: c.hex }} onClick={() => setLabelColorInput(c.hex)}
@@ -780,7 +780,7 @@ export function CardDetailModal({
                             onClick={() => handleAssigneeChange('NONE')}
                             className="flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-muted/60"
                           >
-                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-semibold text-muted-foreground" aria-hidden>—</span>
+                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[12px] font-semibold text-muted-foreground" aria-hidden>—</span>
                             <span className="text-xs text-muted-foreground">Not assigned</span>
                             {!card.assigneeId && <Check className="ml-auto h-3.5 w-3.5 text-foreground" aria-label="Currently not assigned" />}
                           </button>
@@ -794,7 +794,7 @@ export function CardDetailModal({
                               <MemberAvatar person={member} size="sm" />
                               <span className="min-w-0 flex-1">
                                 <span className="block truncate text-xs font-medium text-foreground">{memberDisplayName(member)}</span>
-                                <span className="block truncate text-[10px] text-muted-foreground">{member.email}</span>
+                                <span className="block truncate text-[12px] text-muted-foreground">{member.email}</span>
                               </span>
                               {card.assigneeId === member.userId && <Check className="h-3.5 w-3.5 shrink-0 text-foreground" aria-label="Currently assigned" />}
                             </button>
@@ -866,9 +866,9 @@ export function CardDetailModal({
                     </Popover>
                     {dueDate && (
                       <div className="pt-0.5">
-                        {isDueDateOverdue() && <Badge variant="destructive" className="px-1.5 py-0 text-[10px]">Overdue since {format(dueDate, 'MMM d')}</Badge>}
-                        {isDueToday() && !isDueDateOverdue() && <Badge className="border border-[#E8D9B8] bg-[#FAF3E2] px-1.5 py-0 text-[10px] text-[#7A5F1F]">Due today</Badge>}
-                        {!isDueDateOverdue() && !isDueToday() && <span className="text-[11px] text-muted-foreground">Due {format(dueDate, 'MMM d, yyyy')}</span>}
+                        {isDueDateOverdue() && <Badge variant="destructive" className="px-1.5 py-0 text-[12px]">Overdue since {format(dueDate, 'MMM d')}</Badge>}
+                        {isDueToday() && !isDueDateOverdue() && <Badge className="border border-[#E8D9B8] bg-[#FAF3E2] px-1.5 py-0 text-[12px] text-[#7A5F1F]">Due today</Badge>}
+                        {!isDueDateOverdue() && !isDueToday() && <span className="text-[13px] text-muted-foreground">Due {format(dueDate, 'MMM d, yyyy')}</span>}
                       </div>
                     )}
                   </div>
@@ -884,13 +884,13 @@ export function CardDetailModal({
                         return (
                           <li key={ref.id} className="rounded-lg kala-surface-subtle px-3 py-2">
                             <p className="truncate text-xs font-medium text-foreground" title={label}>{label}</p>
-                            <p className="truncate text-[10px] text-muted-foreground" title={ref.externalId}>{ref.externalId}</p>
+                            <p className="truncate text-[12px] text-muted-foreground" title={ref.externalId}>{ref.externalId}</p>
                             {ref.externalUrl && (
                               <a
                                 href={ref.externalUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-[#3E6355] transition-colors hover:underline"
+                                className="mt-1 inline-flex items-center gap-1 text-[13px] font-medium text-[#3E6355] transition-colors hover:underline"
                               >
                                 Open in {label} <ExternalLink className="h-3 w-3" aria-hidden />
                               </a>
@@ -923,7 +923,7 @@ export function CardDetailModal({
                         Ask Kala AI
                       </span>
                     </Button>
-                    <p className="px-1 text-[11px] leading-snug text-muted-foreground">Suggestions only. Kala AI never changes your card.</p>
+                    <p className="px-1 text-[13px] leading-snug text-muted-foreground">Suggestions only. Kala AI never changes your card.</p>
                   </section>
                 )}
 
@@ -943,7 +943,7 @@ export function CardDetailModal({
           {/* Footer — destructive actions left, primary save/close right */}
           <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-white p-4" style={{ borderColor: 'var(--kala-line)' }}>
             <div className="flex min-h-8 items-center rounded-lg border border-destructive/25 bg-destructive/[0.03] px-2 py-1" role="group" aria-label="Danger zone">
-              <p className="mr-2 text-[10px] font-semibold uppercase tracking-wider text-destructive/80">Danger zone</p>
+              <p className="mr-2 text-[12px] font-semibold uppercase tracking-wider text-destructive/80">Danger zone</p>
               <Button variant="outline" size="sm" onClick={() => setIsConfirmDeleteOpen(true)} className="h-7 border-destructive/25 bg-white text-xs text-destructive hover:bg-destructive/10 hover:text-destructive">
                 <Trash2 className="mr-1.5 h-3.5 w-3.5" aria-hidden />
                 Delete card

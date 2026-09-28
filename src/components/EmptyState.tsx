@@ -26,7 +26,7 @@ export function EmptyState({ icon, title, description, action, compact }: EmptyS
       </div>
       <p className="text-sm font-medium text-foreground">{title}</p>
       {description && (
-        <p className={cn('text-muted-foreground', compact ? 'max-w-56 text-xs' : 'max-w-72 text-[13px] leading-relaxed')}>
+        <p className={cn('text-muted-foreground', compact ? 'max-w-56 text-xs' : 'max-w-72 text-[15px] leading-relaxed')}>
           {description}
         </p>
       )}

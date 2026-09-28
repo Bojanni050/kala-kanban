@@ -1738,7 +1738,7 @@ function App() {
 
   return (
     <TooltipProvider delayDuration={200}>
-    <div className="flex h-screen overflow-hidden bg-[#FAFAF8]">
+    <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar
         workspaces={workspaces}
         sharedBoards={sharedBoards}

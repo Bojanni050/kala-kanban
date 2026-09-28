@@ -53,7 +53,7 @@ function renderInline(text: string): ReactNode[] {
   while ((match = re.exec(text))) {
     if (match.index > last) nodes.push(text.slice(last, match.index));
     if (match[1] !== undefined) nodes.push(<strong key={key++} className="font-semibold text-foreground">{match[1]}</strong>);
-    else nodes.push(<code key={key++} className="rounded bg-[#EFEDE8] px-1 text-[12px]">{match[2]}</code>);
+    else nodes.push(<code key={key++} className="rounded bg-[#EFEDE8] px-1 text-[14px]">{match[2]}</code>);
     last = match.index + match[0].length;
   }
   if (last < text.length) nodes.push(text.slice(last));
@@ -227,7 +227,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
     }
   };
 
-  const chipClass = 'rounded-lg border bg-white px-3 py-2 text-left text-[13px] text-foreground transition-colors hover:kala-surface disabled:opacity-50';
+  const chipClass = 'rounded-lg border bg-white px-3 py-2 text-left text-[15px] text-foreground transition-colors hover:bg-[#FAFAF8] disabled:opacity-50';
 
   return (
     <aside
@@ -248,7 +248,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
         </div>
         <div className="min-w-0 flex-1">
           <h2 className="text-sm font-semibold leading-tight text-foreground">Kala AI</h2>
-          <p className="truncate text-[11px] leading-tight text-muted-foreground" title={status?.enabled ? `${status.provider} · ${status.model}` : undefined}>
+          <p className="truncate text-[13px] leading-tight text-muted-foreground" title={status?.enabled ? `${status.provider} · ${status.model}` : undefined}>
             Read-only assistant{status?.enabled && status.provider ? ` · ${status.provider}` : ''}
           </p>
         </div>
@@ -266,7 +266,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
           <>
             <span className="shrink-0 text-muted-foreground">Card</span>
             <span className="min-w-0 flex-1 truncate font-medium text-foreground" title={card.title}>{card.title}</span>
-            <button type="button" onClick={onClearCard} className="shrink-0 text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground">
+            <button type="button" onClick={onClearCard} className="shrink-0 text-[13px] text-muted-foreground underline underline-offset-2 hover:text-foreground">
               Ask about the whole board
             </button>
           </>
@@ -279,7 +279,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
       </div>
 
       {/* Conversation */}
-      <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 text-[13px] leading-relaxed" aria-live="polite">
+      <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 text-[15px] leading-relaxed" aria-live="polite">
         {enabled === false ? (
           <div className="rounded-lg border p-3 text-muted-foreground" style={line}>
             <p className="font-medium text-foreground">Kala AI isn&rsquo;t ready yet.</p>
@@ -326,11 +326,11 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
                 </div>
                 <div className="mt-1 flex items-center gap-1 pl-1">
                   {message.error ? (
-                    <Button variant="ghost" size="sm" className="h-6 gap-1 px-1.5 text-[11px] text-muted-foreground" onClick={retry}>
+                    <Button variant="ghost" size="sm" className="h-6 gap-1 px-1.5 text-[13px] text-muted-foreground" onClick={retry}>
                       <RotateCcw className="h-3 w-3" aria-hidden /> Try again
                     </Button>
                   ) : (
-                    <Button variant="ghost" size="sm" className="h-6 gap-1 px-1.5 text-[11px] text-muted-foreground" onClick={() => void copy(message)} aria-label="Copy answer">
+                    <Button variant="ghost" size="sm" className="h-6 gap-1 px-1.5 text-[13px] text-muted-foreground" onClick={() => void copy(message)} aria-label="Copy answer">
                       {copiedId === message.id ? <Check className="h-3 w-3" aria-hidden /> : <Copy className="h-3 w-3" aria-hidden />}
                       {copiedId === message.id ? 'Copied' : 'Copy'}
                     </Button>
@@ -352,7 +352,7 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
       {enabled !== false && card && messages.length > 0 && (
         <div className="flex gap-1.5 overflow-x-auto border-t px-4 py-2" style={line}>
           {CARD_ACTIONS.map(({ action, label }) => (
-            <button key={action} type="button" disabled={loading} className="shrink-0 rounded-full border bg-white px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:kala-surface hover:text-foreground disabled:opacity-50" style={line} onClick={() => void send(label, action)}>
+            <button key={action} type="button" disabled={loading} className="shrink-0 rounded-full border bg-white px-2.5 py-1 text-[13px] text-muted-foreground transition-colors hover:bg-[#FAFAF8] hover:text-foreground disabled:opacity-50" style={line} onClick={() => void send(label, action)}>
               {label}
             </button>
           ))}
@@ -385,13 +385,13 @@ export function AiPanel({ open, boardId, boardName, card, onClearCard, onClose }
             disabled={enabled === false}
             placeholder={card ? 'Ask about this card…' : 'Ask about this board…'}
             aria-label="Message to Kala AI"
-            className="min-h-0 resize-none bg-white text-[13px]"
+            className="min-h-0 resize-none bg-white text-[15px]"
           />
           <Button type="submit" size="icon" className="h-9 w-9 shrink-0 bg-[#2A2F36] text-white hover:bg-[#1E2329]" disabled={!input.trim() || loading || enabled === false} aria-label="Send">
             <SendHorizontal className="h-4 w-4" aria-hidden />
           </Button>
         </div>
-        <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+        <p className="mt-2 text-[13px] leading-snug text-muted-foreground">
           Kala AI reads this board and can make mistakes. It never changes your data.
         </p>
       </form>

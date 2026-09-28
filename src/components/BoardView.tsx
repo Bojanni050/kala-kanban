@@ -192,7 +192,7 @@ function HeaderIconButton({ label, onClick, children, badge }: { label: string; 
           >
             {children}
             {typeof badge === 'number' && badge > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
+              <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[11px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
                 {badge}
               </span>
             )}
@@ -519,7 +519,7 @@ export function BoardView({
   const myRoleMeta = ROLE_META[board.myRole];
 
   return (
-    <div className="flex h-full flex-col kala-surface">
+    <div className="flex h-full flex-col bg-background">
       {/* ── Board header ─────────────────────────────────── */}
       <header className="border-b kala-surface" style={{ borderColor: 'var(--kala-line)' }}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5">
@@ -531,12 +531,12 @@ export function BoardView({
             <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-1.5 text-sm">
               <span className="hidden shrink-0 text-muted-foreground sm:inline">{board.workspace?.name}</span>
               <span className="hidden shrink-0 text-muted-foreground/50 sm:inline" aria-hidden>/</span>
-              <h1 className="truncate text-[15px] font-semibold tracking-tight text-foreground">{board.name}</h1>
+              <h1 className="truncate text-[17px] font-semibold tracking-tight text-foreground">{board.name}</h1>
             </nav>
             {!canEdit ? (
-              <Badge variant="secondary" className="shrink-0 text-[11px] font-medium">View only</Badge>
+              <Badge variant="secondary" className="shrink-0 text-[13px] font-medium">View only</Badge>
             ) : (
-              <span className="hidden shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium text-muted-foreground md:inline-flex" style={{ borderColor: 'var(--kala-line)' }} title={myRoleMeta.description}>
+              <span className="hidden shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 text-[13px] font-medium text-muted-foreground md:inline-flex" style={{ borderColor: 'var(--kala-line)' }} title={myRoleMeta.description}>
                 <myRoleMeta.icon className="h-3 w-3" aria-hidden />
                 {myRoleMeta.label}
               </span>
@@ -546,7 +546,7 @@ export function BoardView({
                 role="status"
                 aria-label={connectionStatus === 'offline' ? 'Offline. Changes will sync when reconnected.' : 'Reconnecting to live updates.'}
                 title={connectionStatus === 'offline' ? 'Offline - working locally. The board will sync when the connection returns.' : 'Reconnecting to live updates...'}
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#E8D9B8] bg-[#FAF3E2] px-2 py-0.5 text-[11px] font-medium text-[#7A5F1F]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#E8D9B8] bg-[#FAF3E2] px-2 py-0.5 text-[13px] font-medium text-[#7A5F1F]"
               >
                 <span className="relative flex h-1.5 w-1.5" aria-hidden>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D9A03F] opacity-60" />
@@ -569,7 +569,7 @@ export function BoardView({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search cards..."
                 aria-label="Search cards"
-                className="h-8 w-44 bg-white pl-8 pr-12 text-[13px] lg:w-60"
+                className="h-8 w-44 bg-white pl-8 pr-12 text-[15px] lg:w-60"
               />
               {searchQuery ? (
                 <button type="button" onClick={() => setSearchQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-muted-foreground hover:text-foreground" aria-label="Clear search">
@@ -586,7 +586,7 @@ export function BoardView({
                 <button
                   aria-label={filterBadgeCount > 0 ? `Filters, ${filterBadgeCount} active` : 'Open filters'}
                   className={cn(
-                    'inline-flex h-8 items-center gap-1.5 rounded-md border bg-white px-2.5 text-[13px] transition-colors hover:bg-muted/60',
+                    'inline-flex h-8 items-center gap-1.5 rounded-md border bg-white px-2.5 text-[15px] transition-colors hover:bg-muted/60',
                     filterBadgeCount > 0 ? 'border-[#CE6F51]/50 font-medium text-[#9A4A30]' : 'text-muted-foreground hover:text-foreground'
                   )}
                   style={{ borderColor: filterBadgeCount > 0 ? '#E3BBA9' : 'var(--kala-line)' }}
@@ -594,7 +594,7 @@ export function BoardView({
                   <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
                   <span className="hidden sm:inline">Filters</span>
                   {filterBadgeCount > 0 && (
-                    <span className="flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
+                    <span className="flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[12px] font-bold text-white" style={{ background: 'var(--kala-coral)' }}>
                       {filterBadgeCount}
                     </span>
                   )}
@@ -615,7 +615,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setAssigneeFilter('all')}
                     aria-pressed={assigneeFilter === 'all'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', assigneeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>Everyone</span>
                     {assigneeFilter === 'all' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -624,7 +624,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setAssigneeFilter('unassigned')}
                     aria-pressed={assigneeFilter === 'unassigned'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', assigneeFilter === 'unassigned' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', assigneeFilter === 'unassigned' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>Unassigned</span>
                     {assigneeFilter === 'unassigned' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -637,7 +637,7 @@ export function BoardView({
                         type="button"
                         onClick={() => setAssigneeFilter(member.userId)}
                         aria-pressed={selected}
-                        className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', selected ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                        className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', selected ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                       >
                         <span className="flex min-w-0 items-center gap-2">
                           <MemberAvatar person={member} size="sm" />
@@ -654,7 +654,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setCardTypeFilter('all')}
                     aria-pressed={cardTypeFilter === 'all'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', cardTypeFilter === 'all' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span>All Types</span>
                     {cardTypeFilter === 'all' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -663,7 +663,7 @@ export function BoardView({
                     type="button"
                     onClick={() => setCardTypeFilter('none')}
                     aria-pressed={cardTypeFilter === 'none'}
-                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === 'none' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                    className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', cardTypeFilter === 'none' ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                   >
                     <span className="italic text-muted-foreground">No type</span>
                     {cardTypeFilter === 'none' && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -674,7 +674,7 @@ export function BoardView({
                       type="button"
                       onClick={() => setCardTypeFilter(ct.id)}
                       aria-pressed={cardTypeFilter === ct.id}
-                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', cardTypeFilter === ct.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', cardTypeFilter === ct.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                     >
                       <span className="flex min-w-0 items-center gap-2">
                         <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: ct.color }} aria-hidden />
@@ -692,7 +692,7 @@ export function BoardView({
                       type="button"
                       onClick={() => setDueDateFilter(opt.id)}
                       aria-pressed={dueDateFilter === opt.id}
-                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[13px] transition-colors', dueDateFilter === opt.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
+                      className={cn('flex w-full items-center justify-between rounded-md px-2 py-1.5 text-[15px] transition-colors', dueDateFilter === opt.id ? 'kala-surface-active font-medium text-foreground' : 'text-foreground hover:bg-muted/70')}
                     >
                       <span>{opt.label}</span>
                       {dueDateFilter === opt.id && <Check className="h-3.5 w-3.5 text-[#7FA693]" aria-hidden />}
@@ -702,7 +702,7 @@ export function BoardView({
                 <div className="mb-3 space-y-0.5">
                   <p className="kala-section-label px-1 pb-1">Priority</p>
                   {PRIORITY_OPTIONS.map((opt) => (
-                    <label key={opt.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-foreground hover:bg-muted/70">
+                    <label key={opt.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-foreground hover:bg-muted/70">
                       <Checkbox checked={selectedPriorities.includes(opt.id)} onCheckedChange={() => togglePriorityFilter(opt.id)} aria-label={`Filter by ${opt.label} priority`} />
                       <Flag className="h-3 w-3 text-muted-foreground" aria-hidden />
                       <span>{opt.label}</span>
@@ -714,7 +714,7 @@ export function BoardView({
                   {(board.labels || []).length > 0 ? (
                     <div className="max-h-36 space-y-0.5 overflow-y-auto pr-1">
                       {(board.labels || []).map((label) => (
-                        <label key={label.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-foreground hover:bg-muted/70">
+                        <label key={label.id} className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[15px] text-foreground hover:bg-muted/70">
                           <Checkbox checked={selectedLabelIds.includes(label.id)} onCheckedChange={() => toggleLabelFilter(label.id)} aria-label={`Filter by label ${label.name}`} />
                           <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: label.color }} aria-hidden />
                           <span className="truncate">{label.name}</span>
@@ -739,7 +739,7 @@ export function BoardView({
                     aria-pressed={active}
                     onClick={() => setAssigneeFilter(key)}
                     className={cn(
-                      'inline-flex h-7 items-center rounded-[5px] px-2.5 text-[12px] font-medium transition-colors',
+                      'inline-flex h-7 items-center rounded-[5px] px-2.5 text-[14px] font-medium transition-colors',
                       active ? 'kala-surface-active text-foreground' : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
@@ -762,12 +762,12 @@ export function BoardView({
               size="sm"
               onClick={() => setAiOpen((open) => !open)}
               aria-pressed={aiOpen}
-              className={cn('h-8 gap-1.5 bg-white px-3 text-[13px]', aiOpen && 'bg-[#F6E4DC] hover:bg-[#F6E4DC]')}
+              className={cn('h-8 gap-1.5 bg-white px-3 text-[15px]', aiOpen && 'bg-[#F6E4DC] hover:bg-[#F6E4DC]')}
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: 'var(--kala-coral-strong)' }} aria-hidden />
               Kala AI
             </Button>
-            <Button size="sm" onClick={() => setIsMembersOpen(true)} className="h-8 gap-1.5 bg-[#2A2F36] px-3 text-[13px] text-white hover:bg-[#1E2329]">
+            <Button size="sm" onClick={() => setIsMembersOpen(true)} className="h-8 gap-1.5 bg-[#2A2F36] px-3 text-[15px] text-white hover:bg-[#1E2329]">
               <Users className="h-3.5 w-3.5" aria-hidden />
               Share
             </Button>
@@ -799,14 +799,14 @@ export function BoardView({
                 </Tooltip>
               </TooltipProvider>
               <DropdownMenuContent align="end" className="w-52">
-                <DropdownMenuItem onClick={() => setIsBoardLabelsOpen(true)} className="cursor-pointer text-[13px]">
+                <DropdownMenuItem onClick={() => setIsBoardLabelsOpen(true)} className="cursor-pointer text-[15px]">
                   <Tag className="mr-2 h-3.5 w-3.5" /> Manage labels ({board.labels?.length ?? 0})
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setIsCardTypesOpen(true)} className="cursor-pointer text-[13px]">
+                <DropdownMenuItem onClick={() => setIsCardTypesOpen(true)} className="cursor-pointer text-[15px]">
                   <Layers className="mr-2 h-3.5 w-3.5" /> Card types ({board.cardTypes?.length ?? 0})
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleOpenArchivedCards} className="cursor-pointer text-[13px]">
+                <DropdownMenuItem onClick={handleOpenArchivedCards} className="cursor-pointer text-[15px]">
                   <Archive className="mr-2 h-3.5 w-3.5" /> Archived cards
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -918,7 +918,7 @@ export function BoardView({
               <div className="flex gap-3 overflow-x-auto pb-2 opacity-60" aria-hidden>
                 {filteredLists.slice(0, 4).map((list) => (
                   <div key={list.id} className="kala-list w-72 shrink-0 rounded-xl p-2.5">
-                    <p className="px-1 py-1 text-[13px] font-semibold text-foreground">{list.title}</p>
+                    <p className="px-1 py-1 text-[15px] font-semibold text-foreground">{list.title}</p>
                     <p className="px-1 pb-1 text-xs text-muted-foreground">No matching cards</p>
                   </div>
                 ))}
@@ -1012,8 +1012,8 @@ export function BoardView({
                           <Plus className="h-4 w-4" />
                         </span>
                         <span className="min-w-0">
-                          <span className="block text-[13px] font-semibold text-foreground">Blank list</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">Start empty</span>
+                          <span className="block text-[15px] font-semibold text-foreground">Blank list</span>
+                          <span className="block truncate text-[13px] text-muted-foreground">Start empty</span>
                         </span>
                       </button>
                       <button
@@ -1027,8 +1027,8 @@ export function BoardView({
                           <LayoutTemplate className="h-4 w-4" />
                         </span>
                         <span className="min-w-0">
-                          <span className="block text-[13px] font-semibold text-foreground">Use a template</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">Simple, Project, Sprint and more</span>
+                          <span className="block text-[15px] font-semibold text-foreground">Use a template</span>
+                          <span className="block truncate text-[13px] text-muted-foreground">Simple, Project, Sprint and more</span>
                         </span>
                       </button>
                     </PopoverContent>
@@ -1163,12 +1163,12 @@ export function BoardView({
                       >
                         <MemberAvatar person={member} />
                         <span className="min-w-0">
-                          <span className="block truncate text-[13px] font-medium text-foreground">{displayName(member)}</span>
-                          <span className="block truncate text-[11px] text-muted-foreground">{member.email}</span>
+                          <span className="block truncate text-[15px] font-medium text-foreground">{displayName(member)}</span>
+                          <span className="block truncate text-[13px] text-muted-foreground">{member.email}</span>
                         </span>
                       </button>
                       <span
-                        className="inline-flex h-7 shrink-0 items-center gap-1 rounded-md bg-muted px-2 text-[10px] font-semibold uppercase tracking-wide text-foreground"
+                        className="inline-flex h-7 shrink-0 items-center gap-1 rounded-md bg-muted px-2 text-[12px] font-semibold uppercase tracking-wide text-foreground"
                         title={ROLE_META[member.role].description}
                       >
                         <RoleIcon className="h-3 w-3 text-muted-foreground" aria-hidden />
@@ -1180,7 +1180,7 @@ export function BoardView({
                           setAssigneeFilter(member.userId);
                           setIsTeamPanelOpen(false);
                         }}
-                        className="shrink-0 rounded-full bg-muted px-2.5 py-1 text-[11px] font-semibold text-foreground transition-colors hover:bg-muted/70"
+                        className="shrink-0 rounded-full bg-muted px-2.5 py-1 text-[13px] font-semibold text-foreground transition-colors hover:bg-muted/70"
                         aria-label={`${assigneeCounts.get(member.userId) ?? 0} cards assigned to ${displayName(member)}. Filter by ${displayName(member)}`}
                       >
                         {assigneeCounts.get(member.userId) ?? 0} cards
@@ -1199,13 +1199,13 @@ export function BoardView({
               aria-label={`Filter by unassigned, ${unassignedCount} cards`}
             >
               <span className="flex min-w-0 items-center gap-2.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-[11px] font-semibold text-muted-foreground" aria-hidden>—</span>
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-[13px] font-semibold text-muted-foreground" aria-hidden>—</span>
                 <span className="min-w-0">
-                  <span className="block truncate text-[13px] font-medium text-foreground">Unassigned</span>
-                  <span className="block text-[11px] text-muted-foreground">Cards without an assignee</span>
+                  <span className="block truncate text-[15px] font-medium text-foreground">Unassigned</span>
+                  <span className="block text-[13px] text-muted-foreground">Cards without an assignee</span>
                 </span>
               </span>
-              <span className="shrink-0 rounded-full bg-muted px-2.5 py-1 text-[11px] font-semibold text-foreground">
+              <span className="shrink-0 rounded-full bg-muted px-2.5 py-1 text-[13px] font-semibold text-foreground">
                 {unassignedCount} cards
               </span>
             </button>
@@ -1254,9 +1254,9 @@ export function BoardView({
                                                   : null;
                     if (!text) return null;
                     return (
-                      <li key={entry.id} className="flex items-center justify-between gap-3 rounded-lg kala-surface-subtle px-3 py-1.5 text-[12px]">
+                      <li key={entry.id} className="flex items-center justify-between gap-3 rounded-lg kala-surface-subtle px-3 py-1.5 text-[14px]">
                         <span className="min-w-0 truncate text-muted-foreground">{text}</span>
-                        <span className="shrink-0 text-[11px] text-muted-foreground/70">{format(new Date(entry.createdAt), 'MMM d, HH:mm')}</span>
+                        <span className="shrink-0 text-[13px] text-muted-foreground/70">{format(new Date(entry.createdAt), 'MMM d, HH:mm')}</span>
                       </li>
                     );
                   })}
@@ -1292,7 +1292,7 @@ export function BoardView({
               <div key={label.id} className="flex items-center justify-between rounded-lg border bg-white p-2 pl-2.5" style={{ borderColor: 'var(--kala-line)' }}>
                 <span className="inline-flex items-center gap-2">
                   <span className="h-3 w-3 rounded-full" style={{ backgroundColor: label.color }} aria-hidden />
-                  <span className="text-[13px] font-medium text-foreground">{label.name}</span>
+                  <span className="text-[15px] font-medium text-foreground">{label.name}</span>
                 </span>
                 {onDeleteLabel && canEdit && (
                   <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:bg-destructive/10 hover:text-destructive" onClick={() => onDeleteLabel(label.id)} aria-label={`Delete label ${label.name}`}>
@@ -1353,7 +1353,7 @@ export function BoardView({
                       <input
                         defaultValue={ct.name}
                         aria-label={`Rename card type ${ct.name}`}
-                        className="w-28 rounded border-none bg-transparent text-[13px] font-medium text-foreground outline-none focus:underline"
+                        className="w-28 rounded border-none bg-transparent text-[15px] font-medium text-foreground outline-none focus:underline"
                         onBlur={(e) => {
                           const name = e.target.value.trim();
                           if (name && name !== ct.name) onUpdateCardType(ct.id, { name });
@@ -1374,7 +1374,7 @@ export function BoardView({
                       ))}
                     </span>
                   ) : (
-                    <span className="truncate text-[13px] font-medium text-foreground">{ct.name}</span>
+                    <span className="truncate text-[15px] font-medium text-foreground">{ct.name}</span>
                   )}
                 </span>
                 {canManageBoard(board.myRole) && onDeleteCardType && (
@@ -1409,7 +1409,7 @@ export function BoardView({
                       }}
                       placeholder="Type name, e.g. Task"
                       aria-label="New card type name"
-                      className="h-8 bg-white text-[13px]"
+                      className="h-8 bg-white text-[15px]"
                       autoFocus
                     />
                     <div className="flex flex-wrap items-center gap-1.5">
@@ -1517,16 +1517,16 @@ export function BoardView({
                   {(card.labels?.length || card.priority || card.dueDate) ? (
                     <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t pt-2" style={{ borderColor: 'var(--kala-line)' }}>
                       {card.labels?.map((label) => (
-                        <span key={label.id} style={{ backgroundColor: label.color }} className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold text-white">{label.name}</span>
+                        <span key={label.id} style={{ backgroundColor: label.color }} className="inline-flex items-center rounded px-1.5 py-0.5 text-[12px] font-semibold text-white">{label.name}</span>
                       ))}
                       {card.priority && (
-                        <span className="inline-flex items-center gap-1 rounded-md border bg-muted/70 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                        <span className="inline-flex items-center gap-1 rounded-md border bg-muted/70 px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground">
                           <Flag className="h-2.5 w-2.5" aria-hidden />
                           {card.priority.charAt(0) + card.priority.slice(1).toLowerCase()}
                         </span>
                       )}
                       {card.dueDate && (
-                        <span className="inline-flex items-center gap-1 rounded-md border bg-muted/70 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                        <span className="inline-flex items-center gap-1 rounded-md border bg-muted/70 px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground">
                           <CalendarIcon className="h-2.5 w-2.5" aria-hidden />
                           Due: {format(new Date(card.dueDate), 'MMM d, yyyy')}
                         </span>

@@ -32,24 +32,24 @@ html, body, #root {
 
 /* Night mode: override the brand tokens when the .dark class is set on <html> */
 html.dark {
-  --kala-charcoal: #e8e9eb;
-  --kala-ink: #c9ccd1;
+  --kala-charcoal: #eceef1;
+  --kala-ink: #d6dae0;
   --kala-coral: #d98a6e;
   --kala-coral-strong: #e2a08a;
   --kala-coral-soft: #3a2e29;
   --kala-sage: #8db8a3;
   --kala-sage-soft: #26302b;
-  --kala-canvas: #191d23;
-  --kala-line: #2e343d;
+  --kala-canvas: #171b21;
+  --kala-line: #333a44;
 }
 html.dark body {
   background-color: var(--kala-canvas);
 }
 html.dark .kala-card {
-  background-color: #22272f;
+  background-color: #232932;
 }
 html.dark .kala-list {
-  background: #1e2229;
+  background: #1d222a;
 }
 
 @layer base {
@@ -82,23 +82,23 @@ html.dark .kala-list {
   }
   .dark {
     --background: 210 13% 10%;
-    --foreground: 0 0% 98%;
-    --card: 210 13% 12%;
-    --card-foreground: 0 0% 98%;
-    --popover: 210 13% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --foreground: 0 0% 96%;
+    --card: 210 12% 15%;
+    --card-foreground: 0 0% 96%;
+    --popover: 210 12% 15%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
     --primary-foreground: 210 13% 19%;
-    --secondary: 210 10% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 10% 18%;
-    --muted-foreground: 0 0% 64%;
-    --accent: 210 10% 18%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 40%;
+    --secondary: 210 10% 20%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 210 10% 20%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 210 10% 22%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 62.8% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 10% 22%;
-    --input: 210 10% 22%;
+    --border: 210 10% 26%;
+    --input: 210 10% 26%;
     --ring: 14 55% 56%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -155,16 +155,16 @@ html.dark .kala-list {
     background-color: #f2f0eb;
   }
   html.dark .kala-surface {
-    background-color: #22272f;
+    background-color: #232932;
   }
   html.dark .kala-surface-subtle {
-    background-color: #262b33;
+    background-color: #29303a;
   }
   html.dark .kala-surface-note {
-    background-color: #1e2229;
+    background-color: #1d222a;
   }
   html.dark .kala-surface-active {
-    background-color: #2a3038;
+    background-color: #2e3540;
   }
   .kala-icon-btn {
     @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none;

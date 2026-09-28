@@ -84,7 +84,7 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
           <KalaLogo size={52} />
           <div>
             <h1 className="text-xl font-bold tracking-[0.14em] text-foreground">KALA</h1>
-            <p className="mt-0.5 text-[11px] font-medium tracking-[0.18em] text-muted-foreground">KANBAN & FLOW</p>
+            <p className="mt-0.5 text-[13px] font-medium tracking-[0.18em] text-muted-foreground">KANBAN & FLOW</p>
           </div>
           <p className="max-w-80 text-sm leading-relaxed text-muted-foreground">
             {hasInvitation

@@ -51,7 +51,7 @@ export function MemberAvatar({
             className={cn(
               'inline-flex shrink-0 select-none items-center justify-center rounded-full font-semibold',
               avatarTone(label),
-              size === 'sm' ? 'h-6 w-6 text-[10px]' : 'h-7 w-7 text-[11px]',
+              size === 'sm' ? 'h-6 w-6 text-[12px]' : 'h-7 w-7 text-[13px]',
               ring && 'ring-2 ring-background'
             )}
             aria-label={label}
@@ -79,7 +79,7 @@ export function AvatarStack({ people, max = 5 }: { people: { name: string | null
         </span>
       ))}
       {rest > 0 && (
-        <span className="-ml-1.5 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-muted px-1 text-[10px] font-semibold text-muted-foreground ring-2 ring-background">
+        <span className="-ml-1.5 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-muted px-1 text-[12px] font-semibold text-muted-foreground ring-2 ring-background">
           +{rest}
         </span>
       )}

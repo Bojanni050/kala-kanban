@@ -144,7 +144,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
 
           {/* What this server has configured */}
           {providers.length === 0 ? (
-            <div className="rounded-md kala-surface-note p-2.5 text-[11px] leading-relaxed text-muted-foreground">
+            <div className="rounded-md kala-surface-note p-2.5 text-[13px] leading-relaxed text-muted-foreground">
               No integrations are configured on this server yet. An administrator enables one with the
               <code className="mx-1 rounded bg-white px-1 py-0.5">INTEGRATION_&lt;PROVIDER&gt;_*</code>
               environment variables &mdash; see the README&rsquo;s Integration API section.
@@ -159,12 +159,12 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
                       aria-hidden
                     />
                     <span className="truncate text-xs font-semibold text-foreground">{p.label}</span>
-                    <span className="truncate text-[10px] text-muted-foreground">{p.provider}</span>
-                    <span className={`ml-auto shrink-0 text-[10px] font-medium ${p.enabled ? 'text-[#3E6355]' : 'text-muted-foreground'}`}>
+                    <span className="truncate text-[12px] text-muted-foreground">{p.provider}</span>
+                    <span className={`ml-auto shrink-0 text-[12px] font-medium ${p.enabled ? 'text-[#3E6355]' : 'text-muted-foreground'}`}>
                       {p.enabled ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
-                  <p className="mt-0.5 truncate text-[10px] text-muted-foreground">
+                  <p className="mt-0.5 truncate text-[12px] text-muted-foreground">
                     {p.base_url ?? 'No base URL set'}
                     {' · '}
                     {p.webhook.configured
@@ -225,12 +225,12 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
                 <Check className="h-3.5 w-3.5" aria-hidden />
                 Key &ldquo;{minted.name}&rdquo; created for {providerLabel(minted.provider)}
               </div>
-              <p className="text-[11px] leading-snug text-[#3E6355]">
+              <p className="text-[13px] leading-snug text-[#3E6355]">
                 This token is shown <span className="font-semibold">only once</span>. Store it now &mdash; Kala keeps
                 only its hash and cannot show it again.
               </p>
               <div className="flex items-center gap-1.5">
-                <code className="min-w-0 flex-1 truncate rounded bg-white px-2 py-1.5 text-[11px] text-foreground" title={minted.token}>
+                <code className="min-w-0 flex-1 truncate rounded bg-white px-2 py-1.5 text-[13px] text-foreground" title={minted.token}>
                   {minted.token}
                 </code>
                 <Button type="button" variant="outline" size="sm" onClick={() => void copyToken()} className="h-7 shrink-0 bg-white px-2 text-xs">
@@ -253,7 +253,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
           <div className="space-y-1.5 border-t pt-3" style={line}>
             <h4 className="text-xs font-semibold text-foreground">Your keys</h4>
             {keys.length === 0 ? (
-              <p className="text-[11px] text-muted-foreground">You have not created any integration keys yet.</p>
+              <p className="text-[13px] text-muted-foreground">You have not created any integration keys yet.</p>
             ) : (
               <ul className="space-y-1.5" aria-label="Your integration keys">
                 {keys.map((key) => (
@@ -263,21 +263,21 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
                         {key.name}
                         <span className="ml-1.5 font-normal text-muted-foreground">&middot; {providerLabel(key.provider)}</span>
                       </p>
-                      <p className="truncate text-[10px] text-muted-foreground">
+                      <p className="truncate text-[12px] text-muted-foreground">
                         <code>{key.token_prefix}&hellip;</code>
                         {' · created '}{formatDate(key.created_at)}
                         {' · used '}{formatLastUsed(key.last_used_at)}
                       </p>
                     </div>
                     {key.revoked ? (
-                      <span className="shrink-0 rounded bg-white px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">Revoked</span>
+                      <span className="shrink-0 rounded bg-white px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground">Revoked</span>
                     ) : confirmRevokeId === key.id ? (
                       <span className="flex shrink-0 items-center gap-1">
                         <Button
                           type="button"
                           size="sm"
                           onClick={() => void revokeKey(key.id)}
-                          className="h-6 bg-destructive px-2 text-[10px] text-destructive-foreground hover:bg-destructive/90"
+                          className="h-6 bg-destructive px-2 text-[12px] text-destructive-foreground hover:bg-destructive/90"
                         >
                           Confirm
                         </Button>
@@ -291,7 +291,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
                         variant="outline"
                         size="sm"
                         onClick={() => setConfirmRevokeId(key.id)}
-                        className="h-6 shrink-0 bg-white px-2 text-[10px] text-muted-foreground hover:text-destructive"
+                        className="h-6 shrink-0 bg-white px-2 text-[12px] text-muted-foreground hover:text-destructive"
                       >
                         Revoke
                       </Button>
@@ -302,7 +302,7 @@ export function IntegrationSettingsSection({ active }: { active: boolean }) {
             )}
           </div>
 
-          <p className="text-[11px] leading-snug text-muted-foreground">
+          <p className="text-[13px] leading-snug text-muted-foreground">
             Keys appear here only for your account. Revoking takes effect immediately.
             <Link2 className="mx-1 inline h-3 w-3 align-[-2px]" aria-hidden />
             See the README for endpoints, webhook signing and rate limits.
