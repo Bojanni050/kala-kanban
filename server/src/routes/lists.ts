@@ -7,11 +7,12 @@ const router = Router();
 
 // POST /api/lists
 router.post('/', async (req: Request, res: Response) => {
-  const { title, boardId } = req.body;
+  const { title, boardId, color } = req.body;
   if (!title || typeof boardId !== 'string') {
     res.status(400).json({ error: 'title and boardId are required' });
     return;
   }
+  const listColor = typeof color === 'string' && color.trim() ? color.trim() : null;
   if (!(await authorizeBoard(req, res, boardId, 'edit'))) return;
 
   // Calculate next position
@@ -22,7 +23,7 @@ router.post('/', async (req: Request, res: Response) => {
   const position = lastList ? lastList.position + 1 : 0;
 
   const list = await prisma.list.create({
-    data: { title, boardId, position },
+    data: { title, color: listColor, boardId, position },
     include: { cards: { orderBy: { position: 'asc' } } },
   });
   broadcast(boardId, 'list.created', list, req.userId!);
@@ -32,12 +33,17 @@ router.post('/', async (req: Request, res: Response) => {
 // PATCH /api/lists/:id
 router.patch('/:id', async (req: Request, res: Response) => {
   if (!(await authorizeList(req, res, req.params.id, 'edit'))) return;
-  const { title, position } = req.body;
+  const { title, position, color } = req.body;
+  if (color !== undefined && color !== null && (typeof color !== 'string' || !color.trim())) {
+    res.status(400).json({ error: 'Invalid color' });
+    return;
+  }
   const list = await prisma.list.update({
     where: { id: req.params.id },
     data: {
       ...(title !== undefined && { title }),
       ...(position !== undefined && { position }),
+      ...(color !== undefined && { color: color === null ? null : color.trim() }),
     },
     include: { cards: { orderBy: { position: 'asc' } } },
   });

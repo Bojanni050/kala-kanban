@@ -42,6 +42,7 @@ export interface Board {
 export interface List {
   id: string;
   title: string;
+  color?: string | null;
   position: number;
   boardId: string;
   cards: Card[];
@@ -178,7 +179,7 @@ export interface BoardWithDetails extends Board {
 // one board template. Sections other than lists may be empty (lists-only
 // templates stay valid).
 export interface BoardTemplateSnapshot {
-  lists: string[];
+  lists: { name: string; color: string | null }[];
   labels: { name: string; color: string }[];
   swimlanes: string[];
   cardTypes: { name: string; color: string }[];

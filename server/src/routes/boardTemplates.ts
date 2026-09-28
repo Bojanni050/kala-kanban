@@ -45,6 +45,27 @@ function cleanColored(value: unknown): { name: string; color: string }[] {
     .slice(0, MAX_ITEMS);
 }
 
+// Lists may come as plain names (backwards compatible) or as { name, color }
+// pairs; a template's list colors give a whole column a shared accent.
+function cleanLists(value: unknown): { name: string; color: string | null }[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((v) => typeof v === 'string' || (typeof v === 'object' && v !== null && 'name' in v))
+    .map((v) =>
+      typeof v === 'string'
+        ? { name: v.trim(), color: null }
+        : {
+            name: String((v as { name: unknown }).name).trim(),
+            color:
+              'color' in v && typeof (v as { color: unknown }).color === 'string' && (v as { color: string }).color.trim()
+                ? (v as { color: string }).color.trim()
+                : null,
+          }
+    )
+    .filter((v) => v.name.length > 0 && v.name.length <= 100)
+    .slice(0, MAX_ITEMS);
+}
+
 const keyOf = (name: string) => name.trim().toLowerCase();
 
 router.post('/:id/apply-template', async (req: Request, res: Response) => {
@@ -52,7 +73,7 @@ router.post('/:id/apply-template', async (req: Request, res: Response) => {
   if (!(await authorizeBoard(req, res, boardId, 'edit'))) return;
 
   const body = req.body ?? {};
-  const lists = cleanNames(body.lists);
+  const lists = cleanLists(body.lists);
   const labels = cleanColored(body.labels);
   const swimlanes = cleanNames(body.swimlanes);
   const cardTypes = cleanColored(body.cardTypes);
@@ -89,7 +110,7 @@ router.post('/:id/apply-template', async (req: Request, res: Response) => {
       for (let i = 0; i < lists.length; i++) {
         createdLists.push(
           await tx.list.create({
-            data: { title: lists[i], boardId, position: listStart + i },
+            data: { title: lists[i].name, color: lists[i].color, boardId, position: listStart + i },
             include: { cards: { orderBy: { position: 'asc' } } },
           })
         );

@@ -71,6 +71,7 @@ import { AiPanel } from './AiPanel';
 import { EmptyState } from './EmptyState';
 import { ListTemplatePicker } from './ListTemplatePicker';
 import { toBoardTemplateSnapshot, type ListTemplate } from '@/lib/list-templates';
+import { BOARD_COLORS } from '@/lib/colors';
 import { AvatarStack, MemberAvatar } from './MemberAvatar';
 import { ROLE_META } from './MemberAvatar';
 import { displayName } from '@/lib/roles';
@@ -100,16 +101,7 @@ const PRIORITY_OPTIONS: { id: Priority; label: string }[] = [
   { id: 'MEDIUM', label: 'Medium' },
   { id: 'LOW', label: 'Low' },
 ];
-const CARD_TYPE_COLORS = [
-  { name: 'Blue', hex: '#5B8DD9' },
-  { name: 'Coral', hex: '#CE6F51' },
-  { name: 'Amber', hex: '#D9A03F' },
-  { name: 'Sage', hex: '#7FA693' },
-  { name: 'Teal', hex: '#4FA3A3' },
-  { name: 'Indigo', hex: '#6B7BD6' },
-  { name: 'Purple', hex: '#8B6FC7' },
-  { name: 'Pink', hex: '#D96A9B' },
-];
+const CARD_TYPE_COLORS = BOARD_COLORS;
 // First-use suggestions shown in the manage dialog; never created without an explicit user action.
 const SUGGESTED_CARD_TYPES = ['Task', 'Feature', 'Bug', 'Request'];
 
@@ -146,6 +138,7 @@ const isCardDueThisWeek = (dueDateStr: string | null | undefined) => {
 interface BoardViewProps {
   board: BoardWithDetails;
   onAddList: (title: string, boardId: string) => void;
+  onSetListColor: (listId: string, color: string | null) => void;
   onAddCard: (title: string, listId: string) => void;
   onDeleteList: (listId: string) => void;
   onDeleteCard: (cardId: string) => Promise<boolean>;
@@ -214,6 +207,7 @@ function HeaderIconButton({ label, onClick, children, badge }: { label: string; 
 export function BoardView({
   board,
   onAddList,
+  onSetListColor,
   onAddCard,
   onDeleteList,
   onDeleteCard,
@@ -956,6 +950,7 @@ export function BoardView({
               <ListView
                 key={list.id}
                 list={list}
+                onSetListColor={canEdit ? onSetListColor : undefined}
                 isFiltered={isFiltered}
                 onAddCard={onAddCard}
                 onDeleteList={onDeleteList}
@@ -1366,7 +1361,7 @@ export function BoardView({
                           if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
                         }}
                       />
-                      {CARD_TYPE_COLORS.slice(0, 5).map((c) => (
+                      {CARD_TYPE_COLORS.map((c) => (
                         <button
                           key={c.hex}
                           type="button"

@@ -169,6 +169,7 @@ model Invitation {
 model List {
   id        String   @id @default(uuid())
   title     String
+  color     String?
   position  Float
   boardId   String
   createdAt DateTime @default(now())

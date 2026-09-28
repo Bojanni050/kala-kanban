@@ -66,6 +66,41 @@ const FALLBACK_CARD_TYPE_COLOR = '#5B8DD9';
 export const templateCardTypeColor = (name: string): string =>
   TEMPLATE_CARD_TYPE_COLORS[name] || FALLBACK_CARD_TYPE_COLOR;
 
+// Fixed colors for the standard template lists, so applying a template
+// immediately gives each column (e.g. Ideas = orange, Backlog = blue) a
+// recognizable accent. Lists not listed here get no color.
+export const TEMPLATE_LIST_COLORS: Record<string, string> = {
+  'To Do': '#5B8DD9',
+  Doing: '#D9A03F',
+  Done: '#7FA693',
+  'In Progress': '#D9A03F',
+  Review: '#8B6FC7',
+  Ideas: '#D9A03F',
+  Backlog: '#5B8DD9',
+  Development: '#5B8DD9',
+  'Code Review': '#8B6FC7',
+  Testing: '#4FA3A3',
+  Content: '#D96A9B',
+  Design: '#D96A9B',
+  Live: '#7FA693',
+  Planning: '#5B8DD9',
+  'Content Creation': '#D96A9B',
+  Scheduled: '#6B7BD6',
+  Published: '#7FA693',
+  Draft: '#D9A03F',
+  Inbox: '#5B8DD9',
+  Next: '#4FA3A3',
+  Waiting: '#64748B',
+  Reported: '#DC5A5A',
+  Confirmed: '#DC5A5A',
+  Resolved: '#7FA693',
+  Closed: '#64748B',
+  Ready: '#4FA3A3',
+  Blocked: '#DC5A5A',
+  'Product Backlog': '#5B8DD9',
+  'Sprint Backlog': '#6B7BD6',
+};
+
 export const LIST_TEMPLATES: ListTemplate[] = [
   {
     id: 'simple',
@@ -160,7 +195,7 @@ export const LIST_TEMPLATES: ListTemplate[] = [
 ];
 
 export interface BoardTemplateSnapshot {
-  lists: string[];
+  lists: { name: string; color: string | null }[];
   labels: { name: string; color: string }[];
   swimlanes: string[];
   cardTypes: { name: string; color: string }[];
@@ -169,7 +204,10 @@ export interface BoardTemplateSnapshot {
 /** Build the apply payload for a template (backwards compatible with lists-only templates). */
 export function toBoardTemplateSnapshot(template: ListTemplate): BoardTemplateSnapshot {
   return {
-    lists: template.lists,
+    lists: template.lists.map((name) => ({
+      name,
+      color: TEMPLATE_LIST_COLORS[name] || null,
+    })),
     labels: (template.labels ?? []).map((name) => ({
       name,
       color: TEMPLATE_LABEL_COLORS[name] || '#CE6F51',

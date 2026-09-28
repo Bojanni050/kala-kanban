@@ -32,6 +32,8 @@ import {
 } from '@/components/ui/dialog';
 import { EmptyState } from '@/components/EmptyState';
 import { MemberAvatar } from '@/components/MemberAvatar';
+import { BOARD_COLORS } from '@/lib/colors';
+import { Palette } from 'lucide-react';
 
 interface CardItemProps {
   card: Card;
@@ -39,6 +41,7 @@ interface CardItemProps {
   onEdit: (cardId: string, title: string) => Promise<boolean>;
   onClick?: () => void;
   readOnly?: boolean;
+  accentColor?: string | null;
 }
 
 function IconTip({ label, children }: { label: string; children: React.ReactNode }) {
@@ -52,7 +55,7 @@ function IconTip({ label, children }: { label: string; children: React.ReactNode
   );
 }
 
-export function CardItem({ card, onDelete, onEdit, onClick, readOnly }: CardItemProps) {
+export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColor }: CardItemProps) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -128,6 +131,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly }: CardItem
         tabIndex={0}
         aria-label={`Open card: ${card.title}`}
         className="kala-card group relative flex min-h-[10rem] cursor-pointer flex-col justify-center px-3 py-2.5 transition-[border-color,box-shadow] duration-150 hover:border-[#CFCBC1] hover:shadow-[0_2px_8px_-2px_rgba(42,47,54,0.12)] focus-visible:outline-none"
+        style={accentColor ? { borderLeft: `3px solid ${accentColor}` } : undefined}
       >
         {card.cardType && (
           <div className="mb-1.5 flex flex-wrap items-center gap-1">
@@ -313,7 +317,8 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly }: CardItem
 }
 
 interface ListViewProps {
-  list: { id: string; title: string; cards: Card[] };
+  list: { id: string; title: string; color?: string | null; cards: Card[] };
+  onSetListColor?: (listId: string, color: string | null) => void;
   onAddCard: (title: string, listId: string) => void;
   onDeleteList: (listId: string) => void;
   onDeleteCard: (cardId: string) => Promise<boolean>;
@@ -329,6 +334,7 @@ let activeDrag: { cardId: string; fromListId: string } | null = null;
 
 export function ListView({
   list,
+  onSetListColor,
   onAddCard,
   onDeleteList,
   onDeleteCard,
@@ -455,6 +461,9 @@ export function ListView({
               !readOnly && 'hover:bg-black/[0.04]'
             )}
           >
+            {list.color && (
+              <span className="mr-1.5 inline-block h-2.5 w-2.5 shrink-0 rounded-full align-middle" style={{ backgroundColor: list.color }} aria-hidden />
+            )}
             {list.title}
           </button>
         )}
@@ -475,6 +484,35 @@ export function ListView({
               <DropdownMenuItem onClick={() => setIsAddingCard(true)}>
                 <Plus className="mr-2 h-3.5 w-3.5" /> Add card
               </DropdownMenuItem>
+              {onSetListColor && (
+                <div className="px-2 py-1.5">
+                  <p className="mb-1 flex items-center gap-2 text-[11px] font-medium text-muted-foreground">
+                    <Palette className="h-3 w-3" aria-hidden /> List color
+                  </p>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => onSetListColor(list.id, null)}
+                      aria-label="Remove list color"
+                      title="No color"
+                      className={cn('flex h-5 w-5 items-center justify-center rounded-full border border-dashed text-[10px] text-muted-foreground', !list.color && 'ring-2 ring-offset-1 ring-[#2A2F36]')}
+                    >
+                      <X className="h-3 w-3" aria-hidden />
+                    </button>
+                    {BOARD_COLORS.map((c) => (
+                      <button
+                        key={c.hex}
+                        type="button"
+                        onClick={() => onSetListColor(list.id, c.hex)}
+                        aria-label={`Set list color to ${c.name}`}
+                        aria-pressed={list.color === c.hex}
+                        className={cn('h-5 w-5 rounded-full transition-transform', list.color === c.hex ? 'scale-110 ring-2 ring-offset-1 ring-[#2A2F36]' : 'hover:scale-105 opacity-80')}
+                        style={{ backgroundColor: c.hex }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
               <DropdownMenuItem onClick={() => onDeleteList(list.id)} className="text-destructive focus:text-destructive">
                 <Trash2 className="mr-2 h-3.5 w-3.5" /> Delete list
               </DropdownMenuItem>
@@ -522,6 +560,7 @@ export function ListView({
             >
               <CardItem
                 card={card}
+                accentColor={list.color}
                 onDelete={onDeleteCard}
                 onEdit={onEditCard}
                 readOnly={readOnly}

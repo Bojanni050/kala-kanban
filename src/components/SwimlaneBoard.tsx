@@ -14,7 +14,7 @@ import {
 
 interface SwimlaneBoardProps {
   swimlanes: Swimlane[];
-  lists: { id: string; title: string; cards: Card[] }[];
+  lists: { id: string; title: string; color?: string | null; cards: Card[] }[];
   canEdit: boolean;
   canManage: boolean;
   onDeleteCard: (cardId: string) => Promise<boolean>;
@@ -346,6 +346,7 @@ export function SwimlaneBoard({
                       >
                         <CardItem
                           card={card}
+                          accentColor={list.color}
                           onDelete={onDeleteCard}
                           onEdit={onEditCard}
                           readOnly={!canEdit}

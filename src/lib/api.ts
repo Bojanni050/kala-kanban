@@ -174,12 +174,12 @@ export const api = {
     request<void>(`/integrations/keys/${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
   // Lists
-  createList: (title: string, boardId: string) =>
+  createList: (title: string, boardId: string, color?: string | null) =>
     request<List>('/lists', {
       method: 'POST',
-      body: JSON.stringify({ title, boardId }),
+      body: JSON.stringify({ title, boardId, color: color ?? null }),
     }),
-  updateList: (id: string, data: { title?: string; position?: number }) =>
+  updateList: (id: string, data: { title?: string; position?: number; color?: string | null }) =>
     request<List>(`/lists/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(data),

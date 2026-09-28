@@ -323,6 +323,7 @@ function App() {
     const newList: List = {
       id: tempId,
       title,
+      color: null,
       position: board?.lists?.length ?? 0,
       boardId,
       cards: [],
@@ -343,6 +344,23 @@ function App() {
       );
     } catch {
       // Keep the local list if API fails
+    }
+  };
+
+  // List colors: set or clear a column's accent color (shown on its cards).
+  const handleSetListColor = async (listId: string, color: string | null) => {
+    setBoard((prev) =>
+      prev
+        ? {
+            ...prev,
+            lists: prev.lists.map((l) => (l.id === listId ? { ...l, color } : l)),
+          }
+        : prev
+    );
+    try {
+      await api.updateList(listId, { color });
+    } catch {
+      // The optimistic update stays; realtime events resync on failure
     }
   };
 
@@ -1747,6 +1765,7 @@ function App() {
           <BoardView
             board={board}
             onAddList={handleAddList}
+            onSetListColor={handleSetListColor}
             onApplyBoardTemplate={handleApplyBoardTemplate}
             onAddCard={handleAddCard}
             onDeleteList={handleDeleteList}
