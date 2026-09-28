@@ -76,6 +76,8 @@ interface SidebarProps {
 type Target = { type: 'workspace' | 'board'; id: string };
 type PendingDelete = Target & { name: string };
 
+const buildVersion = "202609281844";
+
 function IconTip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <TooltipProvider delayDuration={200}>
@@ -588,6 +590,11 @@ export function Sidebar({
               <span className="sr-only sm:not-sr-only">Logout</span>
             </button>
           )}
+        </div>
+        <div className="mt-2 border-t pt-2" style={{ borderColor: 'var(--kala-line)' }}>
+          <p className="px-2 text-[11px] text-muted-foreground">
+            build: {buildVersion}
+          </p>
         </div>
       </div>
 
