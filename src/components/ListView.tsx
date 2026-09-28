@@ -157,7 +157,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly }: CardItem
         <p className="pr-12 text-[13px] font-medium leading-snug text-foreground">{card.title}</p>
         {card.description && (
           <p className="mt-1 line-clamp-2 whitespace-pre-line pr-6 text-[11px] leading-snug text-muted-foreground">
-            {card.description}
+            {card.description.length > 100 ? `${card.description.slice(0, 100).trimEnd()}…` : card.description}
           </p>
         )}
 
