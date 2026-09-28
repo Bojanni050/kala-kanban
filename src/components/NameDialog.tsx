@@ -51,7 +51,7 @@ export function NameDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[calc(100vw-2rem)] max-w-sm bg-white">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-sm bg-[#fdfdfc]">
         <form onSubmit={handleSubmit} noValidate className="space-y-4">
           <DialogHeader className="text-left">
             <DialogTitle>{title}</DialogTitle>
@@ -68,12 +68,12 @@ export function NameDialog({
               placeholder={placeholder}
               maxLength={100}
               autoComplete="off"
-              className="bg-white"
+              className="bg-[#fdfdfc]"
             />
           </div>
 
           <DialogFooter className="gap-2 sm:gap-0">
-            <Button type="button" variant="outline" className="bg-white" onClick={() => onOpenChange(false)}>
+            <Button type="button" variant="outline" className="bg-[#fdfdfc]" onClick={() => onOpenChange(false)}>
               Cancel
             </Button>
             <Button type="submit" disabled={!trimmed} className="bg-[#2A2F36] text-white hover:bg-[#1E2329]">

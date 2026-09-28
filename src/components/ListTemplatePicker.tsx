@@ -63,7 +63,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
 
   return (
     <Dialog open={open} onOpenChange={(o) => !creating && onOpenChange(o)}>
-      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-lg flex-col bg-white">
+      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-lg flex-col bg-[#fdfdfc]">
         <DialogHeader className="text-left">
           <DialogTitle>Board templates</DialogTitle>
           <DialogDescription>
@@ -153,7 +153,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
               {selected.lists.length} lists · {(selected.labels ?? []).length} labels · {(selected.swimlanes ?? []).length} swimlanes · {(selected.cardTypes ?? []).length} card types
             </p>
           )}
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={creating} className="bg-white">
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={creating} className="bg-[#fdfdfc]">
             Cancel
           </Button>
           <Button

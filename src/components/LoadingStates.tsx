@@ -22,9 +22,9 @@ export function BoardSkeleton() {
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-5 w-6 rounded-full" />
             </div>
-            <Skeleton className="h-16 w-full rounded-lg bg-white" />
-            <Skeleton className="h-20 w-full rounded-lg bg-white" />
-            <Skeleton className="h-14 w-5/6 rounded-lg bg-white" />
+            <Skeleton className="h-16 w-full rounded-lg bg-[#fdfdfc]" />
+            <Skeleton className="h-20 w-full rounded-lg bg-[#fdfdfc]" />
+            <Skeleton className="h-14 w-5/6 rounded-lg bg-[#fdfdfc]" />
           </div>
         ))}
       </div>

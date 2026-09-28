@@ -34,9 +34,9 @@ html, body, #root {
   :root {
     --background: 60 9% 98%;
     --foreground: 210 13% 19%;
-    --card: 0 0% 100%;
+    --card: 60 9% 99%;
     --card-foreground: 210 13% 19%;
-    --popover: 0 0% 100%;
+    --popover: 60 9% 99%;
     --popover-foreground: 210 13% 19%;
     --primary: 210 13% 19%;
     --primary-foreground: 0 0% 98%;
@@ -123,7 +123,8 @@ html, body, #root {
     @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none;
   }
   .kala-input {
-    @apply h-8 rounded-md border bg-white text-sm;
+    @apply h-8 rounded-md border text-sm;
+    background-color: #fdfdfc;
     border-color: var(--kala-line);
   }
 }

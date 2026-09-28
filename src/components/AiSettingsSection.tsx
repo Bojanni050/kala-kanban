@@ -193,7 +193,7 @@ export function AiSettingsSection({ active }: { active: boolean }) {
             />
             {modelsError && <p className="text-[11px] text-destructive">{modelsError}</p>}
             {models && (
-              <div className="max-h-36 overflow-y-auto rounded-md border bg-white" style={line} role="listbox" aria-label="Available models">
+              <div className="max-h-36 overflow-y-auto rounded-md border bg-[#fdfdfc]" style={line} role="listbox" aria-label="Available models">
                 {filteredModels.length === 0 ? (
                   <p className="px-2 py-1.5 text-[11px] text-muted-foreground">No model matches &ldquo;{modelFilter}&rdquo;. You can still use it as typed.</p>
                 ) : (

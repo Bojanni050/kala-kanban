@@ -102,7 +102,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
                 <Button className="flex-1 bg-[#2A2F36] text-white hover:bg-[#1E2329]" onClick={accept} disabled={busy}>
                   {busy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : 'Accept'}
                 </Button>
-                <Button variant="outline" className="flex-1 bg-white" onClick={decline} disabled={busy}>
+                <Button variant="outline" className="flex-1 bg-[#fdfdfc]" onClick={decline} disabled={busy}>
                   Decline
                 </Button>
               </div>
@@ -119,7 +119,7 @@ export function InvitePage({ token, user, onAccepted, onDone }: InvitePageProps)
                 You are signed in as <span className="font-medium text-foreground">{user.email}</span>. An
                 invitation can only be used by the email address it was sent to.
               </p>
-              <Button variant="outline" className="w-full bg-white" onClick={onDone}>
+              <Button variant="outline" className="w-full bg-[#fdfdfc]" onClick={onDone}>
                 Go to my boards
               </Button>
             </CardContent>

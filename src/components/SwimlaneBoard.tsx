@@ -520,7 +520,7 @@ export function SwimlaneBoard({
               maxLength={100}
             />
             <div className="mt-2 flex justify-end gap-2">
-              <Button variant="ghost" size="sm" className="h-8 bg-white" onClick={() => setRenamingId(null)}>
+              <Button variant="ghost" size="sm" className="h-8 bg-[#fdfdfc]" onClick={() => setRenamingId(null)}>
                 Cancel
               </Button>
               <Button size="sm" className="h-8 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]" onClick={handleRenameSave}>

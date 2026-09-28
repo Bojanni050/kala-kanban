@@ -521,7 +521,7 @@ export function BoardView({
   return (
     <div className="flex h-full flex-col bg-[#FAFAF8]">
       {/* ── Board header ─────────────────────────────────── */}
-      <header className="border-b bg-white" style={{ borderColor: 'var(--kala-line)' }}>
+      <header className="border-b bg-[#fdfdfc]" style={{ borderColor: 'var(--kala-line)' }}>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5">
           {/* Left: sidebar toggle + breadcrumb */}
           <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -881,7 +881,7 @@ export function BoardView({
                       <Button onClick={() => setIsAddingList(true)} className="gap-1.5 bg-[#2A2F36] text-white hover:bg-[#1E2329]">
                         <Plus className="h-4 w-4" aria-hidden /> Add your first list
                       </Button>
-                      <Button variant="outline" onClick={() => setIsTemplatePickerOpen(true)} className="gap-1.5 bg-white">
+                      <Button variant="outline" onClick={() => setIsTemplatePickerOpen(true)} className="gap-1.5 bg-[#fdfdfc]">
                         <LayoutTemplate className="h-4 w-4" aria-hidden /> Use a template
                       </Button>
                     </div>
@@ -912,7 +912,7 @@ export function BoardView({
                             : 'No cards match these filters'
                   }
                   description="Try a different keyword, remove a filter, or clear everything to see the full board."
-                  action={<Button variant="outline" size="sm" onClick={handleClearAllFilters} className="bg-white">Clear filters</Button>}
+                  action={<Button variant="outline" size="sm" onClick={handleClearAllFilters} className="bg-[#fdfdfc]">Clear filters</Button>}
                 />
               </div>
               <div className="flex gap-3 overflow-x-auto pb-2 opacity-60" aria-hidden>
@@ -1133,7 +1133,7 @@ export function BoardView({
       />
 
       <Dialog open={isTeamPanelOpen} onOpenChange={setIsTeamPanelOpen}>
-        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-md flex-col bg-white">
+        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-md flex-col bg-[#fdfdfc]">
           <DialogHeader className="text-left">
             <DialogTitle>Team</DialogTitle>
             <DialogDescription>

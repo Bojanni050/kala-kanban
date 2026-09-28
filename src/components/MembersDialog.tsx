@@ -227,7 +227,7 @@ export function MembersDialog({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-xl flex-col bg-white">
+        <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-xl flex-col bg-[#fdfdfc]">
           <DialogHeader className="text-left">
             <DialogTitle>Share &ldquo;{boardName}&rdquo;</DialogTitle>
             <DialogDescription>
