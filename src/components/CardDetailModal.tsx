@@ -426,7 +426,7 @@ export function CardDetailModal({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-        <DialogContent className="flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-2xl flex-col gap-0 overflow-hidden border bg-white p-0 sm:rounded-xl" style={{ borderColor: 'var(--kala-line)' }} aria-describedby={undefined}>
+        <DialogContent onPointerDownOutside={(e) => e.preventDefault()} className="flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-4xl flex-col gap-0 overflow-hidden border bg-white p-0 sm:rounded-xl" style={{ borderColor: 'var(--kala-line)' }} aria-describedby={undefined}>
           <fieldset disabled={readOnly} className="contents">
             {/* 1 — Title */}
             <DialogHeader className="shrink-0 space-y-2 border-b bg-white p-5 pb-4 text-left" style={{ borderColor: 'var(--kala-line)' }}>
