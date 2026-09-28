@@ -640,36 +640,40 @@ function SettingsDialog({
   const boardCount = workspaces.reduce((n, w) => n + w.boards.length, 0);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[88vh] max-w-md overflow-y-auto">
+      <DialogContent className="max-h-[88vh] w-[60rem] max-w-[calc(100vw-2rem)] overflow-hidden">
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>Your Kala workspace preferences and account overview.</DialogDescription>
         </DialogHeader>
-        <div className="space-y-4 py-1">
-          <div className="flex items-center gap-3 rounded-lg border p-3" style={{ borderColor: 'var(--kala-line)' }}>
-            {user && <MemberAvatar person={{ name: user.name ?? null, email: user.email }} />}
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-foreground">{user?.email ?? '—'}</p>
-              <p className="text-xs text-muted-foreground">Signed in · Kala Kanban & Flow</p>
+        <div className="grid gap-4 overflow-y-auto py-1 lg:grid-cols-2 lg:overflow-y-auto">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 rounded-lg border p-3" style={{ borderColor: 'var(--kala-line)' }}>
+              {user && <MemberAvatar person={{ name: user.name ?? null, email: user.email }} />}
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-foreground">{user?.email ?? '—'}</p>
+                <p className="text-xs text-muted-foreground">Signed in · Kala Kanban & Flow</p>
+              </div>
+            </div>
+            <dl className="grid grid-cols-3 gap-2 text-center">
+              {[
+                { k: String(workspaces.length), v: 'Workspaces' },
+                { k: String(boardCount), v: 'My boards' },
+                { k: String(sharedCount), v: 'Shared' },
+              ].map((s) => (
+                <div key={s.v} className="rounded-lg bg-muted/60 px-2 py-3">
+                  <dt className="text-lg font-bold text-foreground">{s.k}</dt>
+                  <dd className="text-[11px] text-muted-foreground">{s.v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="rounded-lg bg-[#F2F1ED] p-3 text-xs leading-relaxed text-muted-foreground">
+              Kala uses a calm charcoal + coral + sage palette. Boards stay lightly styled on purpose:
+              white cards, subtle borders and restrained shadows keep the focus on your work.
             </div>
           </div>
-          <dl className="grid grid-cols-3 gap-2 text-center">
-            {[
-              { k: String(workspaces.length), v: 'Workspaces' },
-              { k: String(boardCount), v: 'My boards' },
-              { k: String(sharedCount), v: 'Shared' },
-            ].map((s) => (
-              <div key={s.v} className="rounded-lg bg-muted/60 px-2 py-3">
-                <dt className="text-lg font-bold text-foreground">{s.k}</dt>
-                <dd className="text-[11px] text-muted-foreground">{s.v}</dd>
-              </div>
-            ))}
-          </dl>
-          <AiSettingsSection active={open} />
-          <IntegrationSettingsSection active={open} />
-          <div className="rounded-lg bg-[#F2F1ED] p-3 text-xs leading-relaxed text-muted-foreground">
-            Kala uses a calm charcoal + coral + sage palette. Boards stay lightly styled on purpose:
-            white cards, subtle borders and restrained shadows keep the focus on your work.
+          <div className="space-y-4">
+            <AiSettingsSection active={open} />
+            <IntegrationSettingsSection active={open} />
           </div>
         </div>
       </DialogContent>
