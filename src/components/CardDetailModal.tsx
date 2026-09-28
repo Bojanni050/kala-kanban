@@ -936,17 +936,24 @@ export function CardDetailModal({
                       {isArchiving ? 'Archiving...' : 'Archive card'}
                     </Button>
                   )}
-                  <div className="rounded-lg border border-destructive/25 bg-destructive/[0.03] p-2" role="group" aria-label="Danger zone">
-                    <p className="px-1 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-destructive/80">Danger zone</p>
-                    <Button variant="outline" size="sm" onClick={() => setIsConfirmDeleteOpen(true)} className="h-8 w-full justify-start border-destructive/25 bg-white text-xs text-destructive hover:bg-destructive/10 hover:text-destructive">
-                      <Trash2 className="mr-2 h-3.5 w-3.5" aria-hidden />
-                      Delete card
-                    </Button>
-                  </div>
                 </section>
               </aside>
             </div>
           </fieldset>
+          {/* Footer — destructive actions left, primary save/close right */}
+          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-white p-4" style={{ borderColor: 'var(--kala-line)' }}>
+            <div className="flex min-h-8 items-center rounded-lg border border-destructive/25 bg-destructive/[0.03] px-2 py-1" role="group" aria-label="Danger zone">
+              <p className="mr-2 text-[10px] font-semibold uppercase tracking-wider text-destructive/80">Danger zone</p>
+              <Button variant="outline" size="sm" onClick={() => setIsConfirmDeleteOpen(true)} className="h-7 border-destructive/25 bg-white text-xs text-destructive hover:bg-destructive/10 hover:text-destructive">
+                <Trash2 className="mr-1.5 h-3.5 w-3.5" aria-hidden />
+                Delete card
+              </Button>
+            </div>
+            <Button onClick={onClose} disabled={isDeleting} className="h-9 gap-1.5 bg-[#3E6355] px-4 text-xs font-semibold text-white hover:bg-[#355246]">
+              <Check className="h-4 w-4" aria-hidden />
+              Save & close
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
 

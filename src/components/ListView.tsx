@@ -127,7 +127,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly }: CardItem
         role="button"
         tabIndex={0}
         aria-label={`Open card: ${card.title}`}
-        className="kala-card group relative cursor-pointer px-3 py-2.5 transition-[border-color,box-shadow] duration-150 hover:border-[#CFCBC1] hover:shadow-[0_2px_8px_-2px_rgba(42,47,54,0.12)] focus-visible:outline-none"
+        className="kala-card group relative flex min-h-[10rem] cursor-pointer flex-col justify-center px-3 py-2.5 transition-[border-color,box-shadow] duration-150 hover:border-[#CFCBC1] hover:shadow-[0_2px_8px_-2px_rgba(42,47,54,0.12)] focus-visible:outline-none"
       >
         {card.cardType && (
           <div className="mb-1.5 flex flex-wrap items-center gap-1">
