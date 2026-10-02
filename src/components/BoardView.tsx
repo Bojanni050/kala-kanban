@@ -569,7 +569,7 @@ export function BoardView({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search cards..."
                 aria-label="Search cards"
-                className="h-8 w-44 bg-white pl-8 pr-12 text-[15px] lg:w-60"
+                className="h-8 w-44 bg-card pl-8 pr-12 text-[15px] lg:w-60"
               />
               {searchQuery ? (
                 <button type="button" onClick={() => setSearchQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-muted-foreground hover:text-foreground" aria-label="Clear search">
@@ -873,7 +873,7 @@ export function BoardView({
                     <div className="flex w-72 items-center gap-2">
                       <Input ref={listInputRef} value={newListTitle} onChange={(e) => setNewListTitle(e.target.value)}
                         onKeyDown={(e) => { if (e.key === 'Enter') handleAddList(); if (e.key === 'Escape') { setIsAddingList(false); setNewListTitle(''); } }}
-                        placeholder="Enter list title..." aria-label="New list title" className="h-9 bg-white text-sm" />
+                        placeholder="Enter list title..." aria-label="New list title" className="h-9 bg-card text-sm" />
                       <Button size="sm" onClick={handleAddList} className="h-9 bg-[#2A2F36] text-white hover:bg-[#1E2329]">Add</Button>
                     </div>
 ) : onApplyBoardTemplate ? (
@@ -977,7 +977,7 @@ export function BoardView({
                       }}
                       placeholder="Enter list title..."
                       aria-label="New list title"
-                      className="h-9 border bg-white text-sm"
+                      className="h-9 border bg-card text-sm"
                     />
                     <div className="mt-2 flex items-center gap-2">
                       <Button size="sm" onClick={handleAddList} className="h-8 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">Add list</Button>

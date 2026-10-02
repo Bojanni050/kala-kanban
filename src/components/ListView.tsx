@@ -301,7 +301,7 @@ export function CardItem({ card, onDelete, onEdit, onClick, readOnly, accentColo
             }}
             placeholder="Card title"
             aria-label="Card title"
-            className="bg-white text-sm"
+            className="bg-card text-sm"
             maxLength={255}
           />
           <DialogFooter>
@@ -448,7 +448,7 @@ export function ListView({
               if (e.key === 'Escape') { setListTitle(list.title); setIsEditingTitle(false); }
             }}
             aria-label="List title"
-            className="h-7 border bg-white px-1.5 text-[15px] font-semibold shadow-none"
+            className="h-7 border bg-card px-1.5 text-[15px] font-semibold shadow-none"
             maxLength={100}
           />
         ) : (

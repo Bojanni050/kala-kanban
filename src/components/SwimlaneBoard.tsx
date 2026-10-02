@@ -361,7 +361,7 @@ export function SwimlaneBoard({
                   </ul>
                 )}
                 {canEdit && addingCell === dropKey(list.id) && (
-                  <div className="mt-1.5 flex items-center gap-1.5 rounded-lg border border-dashed border-[#D8D5CD] bg-white p-1.5">
+                  <div className="mt-1.5 flex items-center gap-1.5 rounded-lg border border-dashed border-[#D8D5CD] bg-card p-1.5 dark:border-border">
                     <Input
                       ref={cardInputRef}
                       value={newCardTitle}
@@ -474,7 +474,7 @@ export function SwimlaneBoard({
                 }}
                 placeholder="Swimlane name..."
                 aria-label="New swimlane name"
-                className="h-8 border bg-white text-[15px]"
+                className="h-8 border bg-card text-[15px]"
                 maxLength={100}
               />
               <Button size="sm" onClick={handleAddSwimlane} className="h-8 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">
@@ -516,7 +516,7 @@ export function SwimlaneBoard({
                 if (e.key === 'Escape') setRenamingId(null);
               }}
               aria-label="Swimlane name"
-              className="h-9 border bg-white text-sm"
+              className="h-9 border bg-card text-sm"
               maxLength={100}
             />
             <div className="mt-2 flex justify-end gap-2">
