@@ -586,8 +586,8 @@ export function BoardView({
                 <button
                   aria-label={filterBadgeCount > 0 ? `Filters, ${filterBadgeCount} active` : 'Open filters'}
                   className={cn(
-                    'inline-flex h-8 items-center gap-1.5 rounded-md border bg-white px-2.5 text-[15px] transition-colors hover:bg-muted/60',
-                    filterBadgeCount > 0 ? 'border-[#CE6F51]/50 font-medium text-[#9A4A30]' : 'text-muted-foreground hover:text-foreground'
+                    'inline-flex h-8 items-center gap-1.5 rounded-md border bg-card px-2.5 text-[15px] transition-colors hover:bg-muted/60',
+                    filterBadgeCount > 0 ? 'border-[#CE6F51]/50 font-medium text-[#9A4A30] dark:text-[#e2a08a]' : 'text-muted-foreground hover:text-foreground'
                   )}
                   style={{ borderColor: filterBadgeCount > 0 ? '#E3BBA9' : 'var(--kala-line)' }}
                 >
@@ -729,7 +729,7 @@ export function BoardView({
             </Popover>
 
             {/* My Cards quick select */}
-            <div className="hidden items-center gap-0.5 rounded-md border bg-white p-0.5 md:inline-flex" style={{ borderColor: 'var(--kala-line)' }} role="group" aria-label="Card selection">
+            <div className="hidden items-center gap-0.5 rounded-md border bg-card p-0.5 md:inline-flex" style={{ borderColor: 'var(--kala-line)' }} role="group" aria-label="Card selection">
               {(['all', 'me', 'unassigned'] as const).map((key) => {
                 const active = key === 'all' ? assigneeFilter === 'all' : key === 'me' ? isMyCardsFilter : assigneeFilter === 'unassigned';
                 return (
@@ -762,12 +762,12 @@ export function BoardView({
               size="sm"
               onClick={() => setAiOpen((open) => !open)}
               aria-pressed={aiOpen}
-              className={cn('h-8 gap-1.5 bg-white px-3 text-[15px]', aiOpen && 'bg-[#F6E4DC] hover:bg-[#F6E4DC]')}
+              className={cn('h-8 gap-1.5 bg-card px-3 text-[15px]', aiOpen && 'bg-[#F6E4DC] hover:bg-[#F6E4DC] dark:bg-[#3a2e29] dark:hover:bg-[#3a2e29]')}
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: 'var(--kala-coral-strong)' }} aria-hidden />
               Kala AI
             </Button>
-            <Button size="sm" onClick={() => setIsMembersOpen(true)} className="h-8 gap-1.5 bg-[#2A2F36] px-3 text-[15px] text-white hover:bg-[#1E2329]">
+            <Button size="sm" onClick={() => setIsMembersOpen(true)} className="h-8 gap-1.5 bg-primary px-3 text-[15px] text-primary-foreground hover:bg-primary/90">
               <Users className="h-3.5 w-3.5" aria-hidden />
               Share
             </Button>
