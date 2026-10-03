@@ -426,10 +426,10 @@ export function CardDetailModal({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-        <DialogContent onPointerDownOutside={(e) => e.preventDefault()} className="flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-4xl flex-col gap-0 overflow-hidden border bg-white p-0 sm:rounded-xl" style={{ borderColor: 'var(--kala-line)' }} aria-describedby={undefined}>
+        <DialogContent onPointerDownOutside={(e) => e.preventDefault()} className="flex max-h-[90vh] w-[calc(100vw-2rem)] max-w-4xl flex-col gap-0 overflow-hidden border bg-card p-0 sm:rounded-xl" style={{ borderColor: 'var(--kala-line)' }} aria-describedby={undefined}>
           <fieldset disabled={readOnly} className="contents">
             {/* 1 — Title */}
-            <DialogHeader className="shrink-0 space-y-2 border-b bg-white p-5 pb-4 text-left" style={{ borderColor: 'var(--kala-line)' }}>
+            <DialogHeader className="shrink-0 space-y-2 border-b bg-card p-5 pb-4 text-left" style={{ borderColor: 'var(--kala-line)' }}>
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1 pr-6">
                   {isEditingTitle ? (
@@ -443,7 +443,7 @@ export function CardDetailModal({
                         if (e.key === 'Escape') { setTitle(card.title); setIsEditingTitle(false); }
                       }}
                       aria-label="Card title"
-                      className="h-9 bg-white px-2 text-[19px] font-semibold tracking-tight"
+                      className="h-9 bg-background px-2 text-[19px] font-semibold tracking-tight"
                       placeholder="Card title..."
                       maxLength={255}
                     />
@@ -514,11 +514,11 @@ export function CardDetailModal({
                         placeholder="Add a more detailed description..."
                         aria-label="Card description"
                         rows={4}
-                        className="min-h-[100px] resize-y bg-white text-sm"
+                        className="min-h-[100px] resize-y bg-background text-sm"
                       />
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <Button size="sm" onClick={handleSaveDescription} className="h-8 bg-[#2A2F36] px-3 text-xs text-white hover:bg-[#1E2329]">Save</Button>
+                          <Button size="sm" onClick={handleSaveDescription} className="h-8 bg-primary text-primary-foreground hover:bg-primary/90">Save</Button>
                           <Button variant="ghost" size="sm" onClick={handleCancelDescription} className="h-8 px-3 text-xs">Cancel</Button>
                         </div>
                         <span className="hidden text-[13px] text-muted-foreground sm:inline">Ctrl+Enter to save</span>
@@ -534,7 +534,7 @@ export function CardDetailModal({
                       className={cn(
                         'rounded-lg border border-transparent p-3 text-sm leading-relaxed transition-colors',
                         readOnly ? 'bg-muted/30 text-foreground' : 'cursor-pointer',
-                        description ? 'whitespace-pre-wrap kala-surface-subtle text-foreground hover:bg-[#EFEEE9]' : 'border-dashed bg-muted/20 italic text-muted-foreground hover:bg-muted/40'
+                        description ? 'whitespace-pre-wrap kala-surface-subtle text-foreground hover:bg-[#EFEEE9] dark:hover:bg-white/10' : 'border-dashed bg-muted/20 italic text-muted-foreground hover:bg-muted/40'
                       )}
                       style={description ? undefined : { borderColor: 'var(--kala-line)' }}
                     >
@@ -566,8 +566,8 @@ export function CardDetailModal({
                               <Input ref={editItemInputRef} value={editingItemTitle} onChange={(e) => setEditingItemTitle(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter') handleSaveChecklistItemTitle(item.id); if (e.key === 'Escape') setEditingItemId(null); }}
                                 onBlur={() => handleSaveChecklistItemTitle(item.id)}
-                                aria-label="Checklist item title" className="h-7 bg-white px-2 text-[15px]" />
-                              <Button size="sm" className="h-7 bg-[#2A2F36] px-2 text-xs text-white hover:bg-[#1E2329]" onClick={() => handleSaveChecklistItemTitle(item.id)}>Save</Button>
+                                aria-label="Checklist item title" className="h-7 bg-background px-2 text-[15px]" />
+                              <Button size="sm" className="h-7 bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => handleSaveChecklistItemTitle(item.id)}>Save</Button>
                             </span>
                           ) : (
                             <span
@@ -591,14 +591,14 @@ export function CardDetailModal({
                       <div className="space-y-2 rounded-lg border kala-surface p-2.5" style={{ borderColor: 'var(--kala-line)' }}>
                         <Input ref={newItemInputRef} value={newItemTitle} onChange={(e) => setNewItemTitle(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') handleAddChecklistItemSubmit(); if (e.key === 'Escape') { setIsAddingChecklistItem(false); setNewItemTitle(''); } }}
-                          placeholder="Add an item..." aria-label="New checklist item" className="h-8 bg-white text-[15px]" />
+                          placeholder="Add an item..." aria-label="New checklist item" className="h-8 bg-background text-[15px]" />
                         <div className="flex items-center gap-2">
-                          <Button size="sm" onClick={handleAddChecklistItemSubmit} disabled={!newItemTitle.trim()} className="h-7 bg-[#2A2F36] px-3 text-xs text-white hover:bg-[#1E2329]">Add</Button>
+                          <Button size="sm" onClick={handleAddChecklistItemSubmit} disabled={!newItemTitle.trim()} className="h-7 bg-primary text-primary-foreground hover:bg-primary/90">Add</Button>
                           <Button variant="ghost" size="sm" onClick={() => { setIsAddingChecklistItem(false); setNewItemTitle(''); }} className="h-7 px-2.5 text-xs">Cancel</Button>
                         </div>
                       </div>
                     ) : (
-                      <Button variant="outline" size="sm" onClick={() => setIsAddingChecklistItem(true)} className="h-8 bg-white text-xs text-muted-foreground hover:text-foreground">
+                      <Button variant="outline" size="sm" onClick={() => setIsAddingChecklistItem(true)} className="h-8 bg-background text-xs text-muted-foreground hover:text-foreground">
                         <Plus className="mr-1.5 h-3.5 w-3.5" aria-hidden /> Add an item
                       </Button>
                     )}
@@ -657,7 +657,7 @@ export function CardDetailModal({
                   <h3 className="kala-section-label flex items-center gap-1.5"><Tag className="h-3.5 w-3.5" aria-hidden />Labels</h3>
                   <Popover open={isLabelsPopoverOpen} onOpenChange={(open) => { setIsLabelsPopoverOpen(open); if (!open) { setLabelMode('list'); setLabelSearch(''); } }}>
                     <PopoverTrigger asChild>
-                      <Button variant="outline" size="sm" className="h-9 w-full justify-start bg-white px-3 text-xs" aria-label="Manage labels">
+                      <Button variant="outline" size="sm" className="h-9 w-full justify-start bg-background px-3 text-xs" aria-label="Manage labels">
                         <Tag className="mr-2 h-3.5 w-3.5" aria-hidden /> Manage labels
                         {(card.labels?.length ?? 0) > 0 && <span className="ml-auto rounded-full bg-muted px-1.5 py-0.5 text-[12px] font-semibold">{card.labels?.length}</span>}
                       </Button>
@@ -666,7 +666,7 @@ export function CardDetailModal({
                       {labelMode === 'list' && (
                         <>
                           <p className="text-center text-xs font-semibold text-foreground">Labels</p>
-                          <Input placeholder="Search labels..." value={labelSearch} onChange={(e) => setLabelSearch(e.target.value)} aria-label="Search labels" className="h-8 bg-white text-xs" />
+                          <Input placeholder="Search labels..." value={labelSearch} onChange={(e) => setLabelSearch(e.target.value)} aria-label="Search labels" className="h-8 bg-background text-xs" />
                           <div className="max-h-48 space-y-1 overflow-y-auto">
                             {filteredLabels.map((label) => {
                               const attached = isLabelAttached(label.id);
@@ -687,7 +687,7 @@ export function CardDetailModal({
                             )}
                           </div>
                           {onCreateLabel && (
-                            <Button variant="outline" size="sm" className="h-8 w-full bg-white text-xs" onClick={handleStartCreateLabel}>
+                            <Button variant="outline" size="sm" className="h-8 w-full bg-background text-xs" onClick={handleStartCreateLabel}>
                               <Plus className="mr-1 h-3 w-3" aria-hidden /> Create a new label
                             </Button>
                           )}
@@ -698,21 +698,21 @@ export function CardDetailModal({
                           <p className="text-center text-xs font-semibold text-foreground">Create label</p>
                           <div className="space-y-1.5">
                             <label className="text-[13px] text-muted-foreground" htmlFor="kala-new-label">Title</label>
-                            <Input id="kala-new-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-white text-xs" autoFocus />
+                            <Input id="kala-new-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-background text-xs" autoFocus />
                           </div>
                           <div className="space-y-1.5">
                             <span className="text-[13px] text-muted-foreground" id="kala-color-label">Color</span>
                             <div className="grid grid-cols-5 gap-1.5" role="radiogroup" aria-labelledby="kala-color-label">
                               {LABEL_COLORS.map((c) => (
                                 <button key={c.hex} type="button" role="radio" aria-checked={labelColorInput === c.hex} aria-label={c.name} title={c.name} style={{ backgroundColor: c.hex }} onClick={() => setLabelColorInput(c.hex)}
-                                  className={cn('flex h-6 w-full items-center justify-center rounded transition-transform hover:scale-105', labelColorInput === c.hex && 'ring-2 ring-[#2A2F36] ring-offset-1')}>
+                                  className={cn('flex h-6 w-full items-center justify-center rounded transition-transform hover:scale-105', labelColorInput === c.hex && 'ring-2 ring-primary ring-offset-1 dark:ring-offset-background')}>
                                   {labelColorInput === c.hex && <Check className="h-3.5 w-3.5 text-white" aria-hidden />}
                                 </button>
                               ))}
                             </div>
                           </div>
                           <div className="flex items-center gap-2 pt-1">
-                            <Button size="sm" onClick={handleCreateLabelSubmit} disabled={!labelNameInput.trim()} className="h-8 flex-1 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">Create</Button>
+                            <Button size="sm" onClick={handleCreateLabelSubmit} disabled={!labelNameInput.trim()} className="h-8 flex-1 bg-primary text-primary-foreground hover:bg-primary/90">Create</Button>
                             <Button variant="ghost" size="sm" onClick={() => setLabelMode('list')} className="h-8 text-xs">Back</Button>
                           </div>
                         </div>
@@ -722,21 +722,21 @@ export function CardDetailModal({
                           <p className="text-center text-xs font-semibold text-foreground">Edit label</p>
                           <div className="space-y-1.5">
                             <label className="text-[13px] text-muted-foreground" htmlFor="kala-edit-label">Title</label>
-                            <Input id="kala-edit-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-white text-xs" autoFocus />
+                            <Input id="kala-edit-label" value={labelNameInput} onChange={(e) => setLabelNameInput(e.target.value)} placeholder="Label title..." className="h-8 bg-background text-xs" autoFocus />
                           </div>
                           <div className="space-y-1.5">
                             <span className="text-[13px] text-muted-foreground">Color</span>
                             <div className="grid grid-cols-5 gap-1.5">
                               {LABEL_COLORS.map((c) => (
                                 <button key={c.hex} type="button" aria-label={c.name} title={c.name} style={{ backgroundColor: c.hex }} onClick={() => setLabelColorInput(c.hex)}
-                                  className={cn('flex h-6 w-full items-center justify-center rounded transition-transform hover:scale-105', labelColorInput === c.hex && 'ring-2 ring-[#2A2F36] ring-offset-1')}>
+                                  className={cn('flex h-6 w-full items-center justify-center rounded transition-transform hover:scale-105', labelColorInput === c.hex && 'ring-2 ring-primary ring-offset-1 dark:ring-offset-background')}>
                                   {labelColorInput === c.hex && <Check className="h-3.5 w-3.5 text-white" aria-hidden />}
                                 </button>
                               ))}
                             </div>
                           </div>
                           <div className="flex items-center gap-2 pt-1">
-                            <Button size="sm" onClick={handleUpdateLabelSubmit} disabled={!labelNameInput.trim()} className="h-8 flex-1 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">Save</Button>
+                            <Button size="sm" onClick={handleUpdateLabelSubmit} disabled={!labelNameInput.trim()} className="h-8 flex-1 bg-primary text-primary-foreground hover:bg-primary/90">Save</Button>
                             <Button variant="destructive" size="sm" onClick={handleDeleteLabelSubmit} className="h-8 px-2.5 text-xs">Delete</Button>
                             <Button variant="ghost" size="sm" onClick={() => setLabelMode('list')} className="h-8 text-xs">Back</Button>
                           </div>
@@ -756,7 +756,7 @@ export function CardDetailModal({
                           variant="outline"
                           size="sm"
                           disabled={readOnly || isSavingAssignee}
-                          className="h-9 w-full justify-between bg-white px-2.5 text-xs font-normal"
+                          className="h-9 w-full justify-between bg-background px-2.5 text-xs font-normal"
                           aria-label={card.assignee ? `Assignee: ${memberDisplayName(card.assignee)}. Change assignee` : 'Set assignee'}
                         >
                           {card.assignee ? (
@@ -809,7 +809,7 @@ export function CardDetailModal({
                   <div className="space-y-1.5">
                     <h3 className="kala-section-label flex items-center gap-1.5"><Layers className="h-3.5 w-3.5" aria-hidden />Type</h3>
                     <Select value={cardTypeId} onValueChange={handleCardTypeChange}>
-                      <SelectTrigger className="h-9 w-full bg-white text-xs" aria-label="Card type" disabled={readOnly}>
+                      <SelectTrigger className="h-9 w-full bg-background text-xs" aria-label="Card type" disabled={readOnly}>
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -828,7 +828,7 @@ export function CardDetailModal({
                   <div className="space-y-1.5">
                     <h3 className="kala-section-label flex items-center gap-1.5"><Flag className="h-3.5 w-3.5" aria-hidden />Priority</h3>
                     <Select value={priority} onValueChange={handlePriorityChange}>
-                      <SelectTrigger className="h-9 w-full bg-white text-xs" aria-label="Card priority">
+                      <SelectTrigger className="h-9 w-full bg-background text-xs" aria-label="Card priority">
                         <SelectValue placeholder="Select priority" />
                       </SelectTrigger>
                       <SelectContent>
@@ -845,7 +845,7 @@ export function CardDetailModal({
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
-                          className={cn('h-9 w-full justify-start bg-white px-3 text-left text-xs font-normal',
+                          className={cn('h-9 w-full justify-start bg-background px-3 text-left text-xs font-normal',
                             !dueDate && 'text-muted-foreground',
                             isDueDateOverdue() && 'border-[#EAC5B8] text-[#9A4A30]',
                             isDueToday() && !isDueDateOverdue() && 'border-[#E8D9B8] text-[#7A5F1F]')}
@@ -907,7 +907,7 @@ export function CardDetailModal({
                 {onAskAi && (
                   <section className="space-y-2 border-t pt-4" style={{ borderColor: 'var(--kala-line)' }} aria-label="Kala AI">
                     <h3 className="kala-section-label flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5" aria-hidden />Kala AI</h3>
-                    <Button asChild variant="outline" size="sm" className="h-8 w-full cursor-pointer justify-start bg-white text-xs text-foreground">
+                    <Button asChild variant="outline" size="sm" className="h-8 w-full cursor-pointer justify-start bg-background text-xs text-foreground">
                       <span
                         role="button"
                         tabIndex={0}
@@ -931,7 +931,7 @@ export function CardDetailModal({
                 <section className="space-y-2 border-t pt-4" style={{ borderColor: 'var(--kala-line)' }} aria-label="Card actions">
                   <h3 className="kala-section-label">Actions</h3>
                   {onArchiveCard && (
-                    <Button variant="outline" size="sm" onClick={handleArchiveCard} disabled={isArchiving || isDeleting} className="h-8 w-full justify-start bg-white text-xs text-muted-foreground hover:text-foreground">
+                    <Button variant="outline" size="sm" onClick={handleArchiveCard} disabled={isArchiving || isDeleting} className="h-8 w-full justify-start bg-background text-xs text-muted-foreground hover:text-foreground">
                       <Archive className="mr-2 h-3.5 w-3.5" aria-hidden />
                       {isArchiving ? 'Archiving...' : 'Archive card'}
                     </Button>
@@ -941,10 +941,10 @@ export function CardDetailModal({
             </div>
           </fieldset>
           {/* Footer — destructive actions left, primary save/close right */}
-          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-white p-4" style={{ borderColor: 'var(--kala-line)' }}>
+          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t bg-card p-4" style={{ borderColor: 'var(--kala-line)' }}>
             <div className="flex min-h-8 items-center rounded-lg border border-destructive/25 bg-destructive/[0.03] px-2 py-1" role="group" aria-label="Danger zone">
               <p className="mr-2 text-[12px] font-semibold uppercase tracking-wider text-destructive/80">Danger zone</p>
-              <Button variant="outline" size="sm" onClick={() => setIsConfirmDeleteOpen(true)} className="h-7 border-destructive/25 bg-white text-xs text-destructive hover:bg-destructive/10 hover:text-destructive">
+              <Button variant="outline" size="sm" onClick={() => setIsConfirmDeleteOpen(true)} className="h-7 border-destructive/25 bg-background text-xs text-destructive hover:bg-destructive/10 hover:text-destructive">
                 <Trash2 className="mr-1.5 h-3.5 w-3.5" aria-hidden />
                 Delete card
               </Button>
