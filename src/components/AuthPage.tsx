@@ -93,7 +93,7 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
           </p>
         </div>
 
-        <Card className="border bg-white shadow-[0_4px_16px_-4px_rgba(42,47,54,0.12)]" style={{ borderColor: 'var(--kala-line)' }}>
+        <Card className="border bg-card shadow-[0_4px_16px_-4px_rgba(42,47,54,0.12)]" style={{ borderColor: 'var(--kala-line)' }}>
           <Tabs value={tab} onValueChange={(v) => setTab(v as 'login' | 'register')}>
             <CardHeader className="pb-4">
               <CardTitle className="sr-only">Sign in to Kala</CardTitle>
@@ -116,17 +116,17 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
                     <Label htmlFor="login-email">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-                      <Input id="login-email" type="email" placeholder="name@example.com" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} disabled={loginLoading} className="bg-white pl-9" autoFocus autoComplete="email" />
+                      <Input id="login-email" type="email" placeholder="name@example.com" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} disabled={loginLoading} className="bg-background pl-9" autoFocus autoComplete="email" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="login-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-                      <Input id="login-password" type="password" placeholder="••••••••" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} disabled={loginLoading} className="bg-white pl-9" autoComplete="current-password" />
+                      <Input id="login-password" type="password" placeholder="••••••••" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} disabled={loginLoading} className="bg-background pl-9" autoComplete="current-password" />
                     </div>
                   </div>
-                  <Button type="submit" className="h-10 w-full bg-[#2A2F36] text-white hover:bg-[#1E2329]" disabled={loginLoading}>
+                  <Button type="submit" className="h-10 w-full" disabled={loginLoading}>
                     {loginLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />}
                     Sign In
                   </Button>
@@ -144,24 +144,24 @@ export function AuthPage({ onSuccess, hasInvitation }: AuthPageProps) {
                     <Label htmlFor="register-email">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-                      <Input id="register-email" type="email" placeholder="name@example.com" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} disabled={registerLoading} className="bg-white pl-9" autoFocus autoComplete="email" />
+                      <Input id="register-email" type="email" placeholder="name@example.com" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} disabled={registerLoading} className="bg-background pl-9" autoFocus autoComplete="email" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="register-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-                      <Input id="register-password" type="password" placeholder="At least 6 characters" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} disabled={registerLoading} className="bg-white pl-9" autoComplete="new-password" />
+                      <Input id="register-password" type="password" placeholder="At least 6 characters" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} disabled={registerLoading} className="bg-background pl-9" autoComplete="new-password" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="register-confirm-password">Confirm Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-                      <Input id="register-confirm-password" type="password" placeholder="Repeat your password" value={registerConfirmPassword} onChange={(e) => setRegisterConfirmPassword(e.target.value)} disabled={registerLoading} className="bg-white pl-9" autoComplete="new-password" />
+                      <Input id="register-confirm-password" type="password" placeholder="Repeat your password" value={registerConfirmPassword} onChange={(e) => setRegisterConfirmPassword(e.target.value)} disabled={registerLoading} className="bg-background pl-9" autoComplete="new-password" />
                     </div>
                   </div>
-                  <Button type="submit" className="h-10 w-full bg-[#2A2F36] text-white hover:bg-[#1E2329]" disabled={registerLoading}>
+                  <Button type="submit" className="h-10 w-full" disabled={registerLoading}>
                     {registerLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />}
                     Create Account
                   </Button>
