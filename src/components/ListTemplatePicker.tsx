@@ -34,10 +34,10 @@ function SectionPreview({ label, names }: { label: string; names: string[] }) {
   const hidden = names.length - shown.length;
   return (
     <span className="mt-1.5 block">
-      <span className="block text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</span>
+      <span className="block text-[12px] font-semibold uppercase tracking-wide text-foreground/70">{label}</span>
       <span className="mt-0.5 flex flex-wrap items-center gap-1" aria-label={`${label}: ${names.join(', ')}`}>
         {shown.map((name) => (
-          <span key={name} className="inline-flex max-w-full truncate rounded bg-muted px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground">
+          <span key={name} className="inline-flex max-w-full truncate rounded bg-muted px-1.5 py-0.5 text-[12px] font-medium text-foreground/80">
             {name}
           </span>
         ))}
@@ -63,7 +63,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
 
   return (
     <Dialog open={open} onOpenChange={(o) => !creating && onOpenChange(o)}>
-      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-lg flex-col kala-surface">
+      <DialogContent className="flex max-h-[85vh] w-[calc(100vw-2rem)] max-w-4xl flex-col kala-surface">
         <DialogHeader className="text-left">
           <DialogTitle>Board templates</DialogTitle>
           <DialogDescription>
@@ -71,7 +71,7 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid flex-1 gap-2 overflow-y-auto py-1 pr-0.5 sm:grid-cols-2" role="radiogroup" aria-label="Board templates">
+        <div className="grid flex-1 gap-3 overflow-y-auto py-1 pr-0.5 sm:grid-cols-2" role="radiogroup" aria-label="Board templates">
           {LIST_TEMPLATES.map((template) => {
             const isSelected = template.id === selectedId;
             const labels = template.labels ?? [];
@@ -86,10 +86,10 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
                 aria-checked={isSelected}
                 onClick={() => setSelectedId(template.id)}
                 className={cn(
-                  'relative rounded-lg border bg-white p-3 text-left transition-colors focus-visible:outline-none',
+                  'relative rounded-lg border bg-white p-3.5 text-left transition-colors focus-visible:outline-none',
                   isSelected
                     ? 'bg-[#FDF6F2]'
-                    : 'hover:bg-muted/50'
+                    : 'hover:bg-muted/30'
                 )}
                 style={{ borderColor: isSelected ? 'var(--kala-coral)' : 'var(--kala-line)' }}
               >
@@ -104,8 +104,9 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
                 )}
                 <span className="block pr-6 text-[15px] font-semibold text-foreground">{template.name}</span>
                 <span className="mt-0.5 block text-[13px] leading-snug text-muted-foreground">{template.description}</span>
-                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] font-semibold text-muted-foreground">
-                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] font-semibold text-muted-foreground">
+                <span className="block pr-6 text-[15px] font-semibold text-foreground">{template.name}</span>
+                <span className="mt-0.5 block text-[13px] leading-snug text-foreground/80">{template.description}</span>
+                <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] font-semibold text-foreground/75">
                   {meta.map(({ label, names }, i) => (
                     <span key={label} className="inline-flex items-center gap-1">
                       {i > 0 && <span aria-hidden>·</span>}
@@ -116,9 +117,6 @@ export function ListTemplatePicker({ open, onOpenChange, creating, onUseTemplate
                       </span>
                     </span>
                   ))}
-                </span>
-                <SectionPreview label="Lists" names={template.lists} />
-                <SectionPreview label="Swimlanes" names={swimlanes} />
                 </span>
                 <SectionPreview label="Lists" names={template.lists} />
                 <SectionPreview label="Swimlanes" names={swimlanes} />
