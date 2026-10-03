@@ -992,7 +992,7 @@ export function BoardView({
                       <button
                         aria-label="Add list"
                         aria-haspopup="menu"
-                        className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-white/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
+                        className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-card/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
                         style={{ borderColor: 'var(--kala-line)' }}
                       >
                         <Plus className="h-4 w-4" aria-hidden />
@@ -1036,7 +1036,7 @@ export function BoardView({
                 ) : (
                   <button
                     onClick={() => setIsAddingList(true)}
-                    className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-white/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
+                    className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-card/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
                     style={{ borderColor: 'var(--kala-line)' }}
                   >
                     <Plus className="h-4 w-4" aria-hidden />
@@ -1049,7 +1049,7 @@ export function BoardView({
               <div className="w-72 shrink-0">
                 <button
                   onClick={() => setIsAddingSwimlane(true)}
-                  className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-white/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
+                  className="flex w-full items-center gap-1.5 rounded-xl border border-dashed bg-card/60 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
                   style={{ borderColor: 'var(--kala-line)' }}
                 >
                   <Plus className="h-4 w-4" aria-hidden />

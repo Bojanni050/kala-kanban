@@ -439,7 +439,7 @@ export function SwimlaneBoard({
                           onClick={() => onSetListColor(list.id, c.hex)}
                           aria-label={`Set list color to ${c.name}`}
                           aria-pressed={list.color === c.hex}
-                          className={cn('h-5 w-5 rounded-full transition-transform', list.color === c.hex ? 'scale-110 ring-2 ring-offset-1 ring-[#2A2F36]' : 'hover:scale-105 opacity-80')}
+                          className={cn('h-5 w-5 rounded-full transition-transform', list.color === c.hex ? 'scale-110 ring-2 ring-offset-1 ring-primary' : 'hover:scale-105 opacity-80')}
                           style={{ backgroundColor: c.hex }}
                         />
                       ))}
@@ -477,7 +477,7 @@ export function SwimlaneBoard({
                 className="h-8 border bg-card text-[15px]"
                 maxLength={100}
               />
-              <Button size="sm" onClick={handleAddSwimlane} className="h-8 bg-[#2A2F36] text-xs text-white hover:bg-[#1E2329]">
+              <Button size="sm" onClick={handleAddSwimlane} className="h-8 bg-primary text-xs text-primary-foreground hover:bg-primary/90">
                 Add
               </Button>
               <Button
@@ -496,7 +496,7 @@ export function SwimlaneBoard({
           ) : (
             <button
               onClick={() => setIsAdding(true)}
-              className="flex items-center gap-1.5 rounded-lg border border-dashed bg-white/60 px-3 py-2 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-white hover:text-foreground"
+              className="flex items-center gap-1.5 rounded-lg border border-dashed bg-card/60 px-3 py-2 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
               style={{ borderColor: 'var(--kala-line)' }}
             >
               <Plus className="h-4 w-4" aria-hidden /> Add swimlane
