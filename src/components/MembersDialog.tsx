@@ -53,7 +53,7 @@ const inviteLink = (token: string) => `${window.location.origin}/invite/${token}
 function RoleSelect({ value, onChange, disabled, label }: { value: AssignableRole; onChange: (role: AssignableRole) => void; disabled?: boolean; label: string }) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as AssignableRole)} disabled={disabled}>
-      <SelectTrigger className="h-8 w-28 bg-white text-xs" aria-label={label}>
+      <SelectTrigger className="h-8 w-28 bg-card text-xs" aria-label={label}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
@@ -242,10 +242,10 @@ export function MembersDialog({
                   <MailPlus className="h-3.5 w-3.5" aria-hidden /> Invite by email
                 </h3>
                 <form noValidate className="flex flex-col gap-2 sm:flex-row sm:items-center" onSubmit={(e) => { e.preventDefault(); handleInvite(); }}>
-                  <Input type="email" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} placeholder="name@example.com" aria-label="Email to invite" className="h-9 flex-1 bg-white text-sm" />
+                  <Input type="email" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} placeholder="name@example.com" aria-label="Email to invite" className="h-9 flex-1 bg-card text-sm" />
                   <div className="flex items-center gap-2">
                     <RoleSelect value={inviteRole} onChange={setInviteRole} label="Role for new invitation" />
-                    <Button type="submit" size="sm" className="h-9 bg-[#2A2F36] px-4 text-white hover:bg-[#1E2329]" disabled={inviting || !inviteEmail.trim()}>
+                    <Button type="submit" size="sm" className="h-9 bg-primary px-4 text-primary-foreground hover:bg-primary/90" disabled={inviting || !inviteEmail.trim()}>
                       {inviting ? 'Sending...' : 'Send invitation'}
                     </Button>
                   </div>
@@ -260,8 +260,8 @@ export function MembersDialog({
                       Invitation sent to <span className="font-semibold">{lastInvite.email}</span> as {ROLE_META[lastInvite.role].label}. The link below is a backup, in case the email does not arrive:
                     </p>
                     <div className="flex items-center gap-2">
-                      <Input readOnly value={inviteLink(lastInvite.token)} className="h-8 bg-white text-xs" onFocus={(e) => e.target.select()} aria-label="Invitation link" />
-                      <Button variant="outline" size="sm" className="h-8 shrink-0 gap-1 bg-white text-xs" onClick={() => copyLink(lastInvite.token)}>
+                      <Input readOnly value={inviteLink(lastInvite.token)} className="h-8 bg-card text-xs" onFocus={(e) => e.target.select()} aria-label="Invitation link" />
+                      <Button variant="outline" size="sm" className="h-8 shrink-0 gap-1 bg-card text-xs" onClick={() => copyLink(lastInvite.token)}>
                         {copiedToken === lastInvite.token ? <Check className="h-3 w-3" aria-hidden /> : <Copy className="h-3 w-3" aria-hidden />}
                         {copiedToken === lastInvite.token ? 'Copied' : 'Copy'}
                       </Button>
@@ -300,7 +300,7 @@ export function MembersDialog({
                   const isOwner = member.role === 'OWNER';
                   const canChange = canManage && !isMe && !isOwner;
                   return (
-                    <li key={member.userId} className="flex items-center justify-between gap-3 rounded-lg border bg-white p-2" style={{ borderColor: 'var(--kala-line)' }}>
+                    <li key={member.userId} className="flex items-center justify-between gap-3 rounded-lg border bg-card p-2" style={{ borderColor: 'var(--kala-line)' }}>
                       <div className="flex min-w-0 items-center gap-2.5">
                         <MemberAvatar person={member} />
                         <div className="min-w-0">
@@ -343,21 +343,21 @@ export function MembersDialog({
                 <h3 className="kala-section-label">Pending invitations ({invitations.length})</h3>
                 <ul className="space-y-1.5">
                   {invitations.map((invitation) => (
-                    <li key={invitation.id} className="flex items-center justify-between gap-3 rounded-lg border border-dashed bg-white p-2" style={{ borderColor: 'var(--kala-line)' }}>
+                    <li key={invitation.id} className="flex items-center justify-between gap-3 rounded-lg border border-dashed bg-card p-2" style={{ borderColor: 'var(--kala-line)' }}>
                       <div className="min-w-0">
                         <p className="truncate text-sm text-foreground">{invitation.email}</p>
                         <p className="text-xs text-muted-foreground">
                           {ROLE_META[invitation.role].label}
-                          {!invitation.userExists && <span className="text-[#9A4A30]"> · Not registered yet</span>}
+                          {!invitation.userExists && <span className="text-[#9A4A30] dark:text-[#e2a08a]"> · Not registered yet</span>}
                         </p>
                       </div>
                       <div className="flex shrink-0 items-center gap-1.5">
                         <Badge variant="outline" className="hidden font-normal text-muted-foreground sm:inline-flex">Pending</Badge>
-                        <Button variant="outline" size="sm" className="h-7 gap-1 bg-white text-xs" onClick={() => handleResend(invitation)} disabled={resendingId === invitation.id} aria-label={`Resend invitation email to ${invitation.email}`}>
+                        <Button variant="outline" size="sm" className="h-7 gap-1 bg-card text-xs" onClick={() => handleResend(invitation)} disabled={resendingId === invitation.id} aria-label={`Resend invitation email to ${invitation.email}`}>
                           <MailPlus className="h-3 w-3" aria-hidden />
                           {resendingId === invitation.id ? 'Sending...' : 'Resend'}
                         </Button>
-                        <Button variant="outline" size="sm" className="h-7 gap-1 bg-white text-xs" onClick={() => copyLink(invitation.token)} aria-label={`Copy invite link for ${invitation.email}`}>
+                        <Button variant="outline" size="sm" className="h-7 gap-1 bg-card text-xs" onClick={() => copyLink(invitation.token)} aria-label={`Copy invite link for ${invitation.email}`}>
                           {copiedToken === invitation.token ? <Check className="h-3 w-3" aria-hidden /> : <Copy className="h-3 w-3" aria-hidden />}
                           {copiedToken === invitation.token ? 'Copied' : 'Copy link'}
                         </Button>
@@ -395,7 +395,7 @@ export function MembersDialog({
               </p>
             ) : (
               <div className="rounded-lg border border-destructive/25 bg-destructive/[0.03] p-2">
-                <Button variant="outline" size="sm" className="h-8 gap-1.5 border-destructive/25 bg-white text-xs text-destructive hover:bg-destructive/10 hover:text-destructive" onClick={() => setConfirm({ type: 'leave' })}>
+                <Button variant="outline" size="sm" className="h-8 gap-1.5 border-destructive/25 bg-card text-xs text-destructive hover:bg-destructive/10 hover:text-destructive" onClick={() => setConfirm({ type: 'leave' })}>
                   <LogOut className="h-3.5 w-3.5" aria-hidden />
                   Leave board
                 </Button>

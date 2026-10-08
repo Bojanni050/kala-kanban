@@ -79,7 +79,7 @@ interface SidebarProps {
 type Target = { type: 'workspace' | 'board'; id: string };
 type PendingDelete = Target & { name: string };
 
-const buildVersion = "202609282351";
+const buildVersion = "202610081210";
 
 function IconTip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
