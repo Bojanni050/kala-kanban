@@ -40,7 +40,7 @@ let activeSwimlaneDrag: string | null = null;
 // narrower from its right edge; the choices are remembered per browser.
 // Column 0 is the swimlane header column, the rest are the list columns.
 const HEADER_COL_STORAGE_KEY = 'tabla.swimlaneHeaderWidth';
-const HEADER_COL_DEFAULT = 176;
+const HEADER_COL_DEFAULT = 250;
 const HEADER_COL_MIN = 120;
 const HEADER_COL_MAX = 420;
 
