@@ -36,19 +36,106 @@ interface SwimlaneBoardProps {
 let activeDrag: { cardId: string; fromSwimlaneId: string | null } | null = null;
 let activeSwimlaneDrag: string | null = null;
 
-// Width of the fixed swimlane header column (the first column). Users can drag
-// its right edge so long swimlane names stay readable; the choice is remembered.
+// Column widths in the swimlane grid. Every column can be dragged wider or
+// narrower from its right edge; the choices are remembered per browser.
+// Column 0 is the swimlane header column, the rest are the list columns.
 const HEADER_COL_STORAGE_KEY = 'tabla.swimlaneHeaderWidth';
 const HEADER_COL_DEFAULT = 176;
 const HEADER_COL_MIN = 120;
 const HEADER_COL_MAX = 420;
 
+const LIST_COL_STORAGE_KEY = 'tabla.swimlaneListWidths';
+const LIST_COL_DEFAULT = 288;
+const LIST_COL_MIN = 200;
+const LIST_COL_MAX = 560;
+
+// Horizontal gap between columns; must match the `gap-3` on the grid rows.
+const COL_GAP = 12;
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, Math.round(value)));
+
 const readStoredHeaderWidth = (): number => {
   if (typeof window === 'undefined') return HEADER_COL_DEFAULT;
   const saved = Number(window.localStorage.getItem(HEADER_COL_STORAGE_KEY));
   if (!Number.isFinite(saved)) return HEADER_COL_DEFAULT;
-  return Math.min(HEADER_COL_MAX, Math.max(HEADER_COL_MIN, saved));
+  return clamp(saved, HEADER_COL_MIN, HEADER_COL_MAX);
 };
+
+const readStoredListWidths = (): Record<string, number> => {
+  if (typeof window === 'undefined') return {};
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(LIST_COL_STORAGE_KEY) ?? '{}');
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+    const out: Record<string, number> = {};
+    for (const [listId, width] of Object.entries(parsed as Record<string, unknown>)) {
+      const numeric = Number(width);
+      if (Number.isFinite(numeric)) out[listId] = clamp(numeric, LIST_COL_MIN, LIST_COL_MAX);
+    }
+    return out;
+  } catch {
+    return {};
+  }
+};
+
+// One drag handle on the right edge of a column, spanning the board's height.
+interface ColumnResizerProps {
+  left: number;
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  isActive: boolean;
+  onMouseDown: (e: React.MouseEvent) => void;
+  onReset: () => void;
+  onNudge: (delta: number) => void;
+}
+
+function ColumnResizer({
+  left,
+  label,
+  value,
+  min,
+  max,
+  isActive,
+  onMouseDown,
+  onReset,
+  onNudge,
+}: ColumnResizerProps) {
+  return (
+    <div
+      role="separator"
+      aria-orientation="vertical"
+      aria-label={label}
+      aria-valuenow={value}
+      aria-valuemin={min}
+      aria-valuemax={max}
+      tabIndex={0}
+      title="Drag to resize, double-click to reset"
+      onMouseDown={onMouseDown}
+      onDoubleClick={onReset}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          onNudge(-16);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          onNudge(16);
+        }
+      }}
+      className="group absolute bottom-0 top-0 z-20 flex w-2 -translate-x-1 cursor-col-resize items-center justify-center focus:outline-none"
+      style={{ left }}
+    >
+      <span
+        className={cn(
+          'h-10 w-0.5 rounded-full transition-colors group-hover:bg-[#CE6F51] group-focus-visible:bg-[#CE6F51]',
+          isActive ? 'bg-[#CE6F51]' : 'bg-muted-foreground/20'
+        )}
+        aria-hidden
+      />
+    </div>
+  );
+}
 
 export function SwimlaneBoard({
   swimlanes,
@@ -78,6 +165,8 @@ export function SwimlaneBoard({
   const [dragOverSwimlaneIndex, setDragOverSwimlaneIndex] = useState<number | null>(null);
   const [headerWidth, setHeaderWidth] = useState<number>(readStoredHeaderWidth);
   const [isResizingHeader, setIsResizingHeader] = useState(false);
+  const [listWidths, setListWidths] = useState<Record<string, number>>(readStoredListWidths);
+  const [resizingListId, setResizingListId] = useState<string | null>(null);
   const addInputRef = useRef<HTMLInputElement>(null);
   const renameInputRef = useRef<HTMLInputElement>(null);
   const cardInputRef = useRef<HTMLInputElement>(null);
@@ -90,26 +179,56 @@ export function SwimlaneBoard({
     }
   }, [headerWidth]);
 
-  const setHeaderWidthClamped = (next: number) =>
-    setHeaderWidth(Math.min(HEADER_COL_MAX, Math.max(HEADER_COL_MIN, Math.round(next))));
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(LIST_COL_STORAGE_KEY, JSON.stringify(listWidths));
+    } catch {
+      // Storage can be unavailable (private mode); widths still apply for the session.
+    }
+  }, [listWidths]);
 
-  const startHeaderResize = (e: React.MouseEvent) => {
+  // Width of a list column: the user's saved choice, or the default.
+  const listWidth = (listId: string) => listWidths[listId] ?? LIST_COL_DEFAULT;
+
+  const setHeaderWidthClamped = (next: number) =>
+    setHeaderWidth(clamp(next, HEADER_COL_MIN, HEADER_COL_MAX));
+
+  const setListWidthClamped = (listId: string, next: number) =>
+    setListWidths((prev) => ({ ...prev, [listId]: clamp(next, LIST_COL_MIN, LIST_COL_MAX) }));
+
+  // Shared drag-to-resize: tracks the pointer and reports the resulting width.
+  const startResize = (
+    e: React.MouseEvent,
+    startWidth: number,
+    onResize: (next: number) => void,
+    onDone: () => void
+  ) => {
     e.preventDefault();
     const startX = e.clientX;
-    const startWidth = headerWidth;
-    setIsResizingHeader(true);
     document.body.style.cursor = 'col-resize';
     document.body.style.userSelect = 'none';
-    const onMove = (ev: MouseEvent) => setHeaderWidthClamped(startWidth + (ev.clientX - startX));
+    const onMove = (ev: MouseEvent) => onResize(startWidth + (ev.clientX - startX));
     const onUp = () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
       document.body.style.cursor = '';
       document.body.style.userSelect = '';
-      setIsResizingHeader(false);
+      onDone();
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
+  };
+
+  const startHeaderResize = (e: React.MouseEvent) => {
+    setIsResizingHeader(true);
+    startResize(e, headerWidth, setHeaderWidthClamped, () => setIsResizingHeader(false));
+  };
+
+  const startListResize = (listId: string, e: React.MouseEvent) => {
+    setResizingListId(listId);
+    startResize(e, listWidth(listId), (next) => setListWidthClamped(listId, next), () =>
+      setResizingListId(null)
+    );
   };
 
   useEffect(() => {
@@ -350,9 +469,10 @@ export function SwimlaneBoard({
               <div
                 key={list.id}
                 className={cn(
-                  'kala-card min-h-16 w-72 shrink-0 rounded-xl p-1.5',
+                  'kala-card min-h-16 shrink-0 rounded-xl p-1.5',
                   isOver && 'ring-2 ring-[#CE6F51]'
                 )}
+                style={{ width: listWidth(list.id) }}
                 onDragOver={(e) => {
                   if (!activeDrag) return;
                   e.preventDefault();
@@ -446,13 +566,29 @@ export function SwimlaneBoard({
     );
   };
 
+  // Left edge of every list column, so the resize handles line up with the grid
+  // (column 0 is the swimlane header, then each list column, all separated by COL_GAP).
+  const listColumns = (() => {
+    let left = headerWidth + COL_GAP;
+    return lists.map((list) => {
+      const width = listWidth(list.id);
+      const column = { id: list.id, title: list.title, width, left };
+      left += width + COL_GAP;
+      return column;
+    });
+  })();
+
   return (
     <div className="relative flex min-h-0 flex-col gap-2" aria-label="Swimlane board">
       {/* Column headers: the lists stay on top as columns */}
       <div className="flex gap-3">
         <div className="shrink-0" style={{ width: headerWidth }} />
         {lists.map((list) => (
-          <div key={list.id} className="flex w-72 shrink-0 items-center gap-1 px-1">
+          <div
+            key={list.id}
+            className="flex shrink-0 items-center gap-1 pl-1 pr-2"
+            style={{ width: listWidth(list.id) }}
+          >
             {list.color && (
               <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: list.color }} aria-hidden />
             )}
@@ -498,38 +634,32 @@ export function SwimlaneBoard({
           </div>
         ))}
       </div>
-      {/* Drag handle to resize the first (swimlane header) column */}
-      <div
-        role="separator"
-        aria-orientation="vertical"
-        aria-label="Resize swimlane column"
-        aria-valuenow={headerWidth}
-        aria-valuemin={HEADER_COL_MIN}
-        aria-valuemax={HEADER_COL_MAX}
-        tabIndex={0}
-        title="Drag to resize the swimlane column"
+      {/* Drag handles: one on the right edge of every column, spanning the board */}
+      <ColumnResizer
+        left={headerWidth}
+        label="Resize swimlane column"
+        value={headerWidth}
+        min={HEADER_COL_MIN}
+        max={HEADER_COL_MAX}
+        isActive={isResizingHeader}
         onMouseDown={startHeaderResize}
-        onDoubleClick={() => setHeaderWidthClamped(HEADER_COL_DEFAULT)}
-        onKeyDown={(e) => {
-          if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            setHeaderWidthClamped(headerWidth - 16);
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            setHeaderWidthClamped(headerWidth + 16);
-          }
-        }}
-        className="group absolute bottom-0 top-0 z-20 flex w-2 -translate-x-1 cursor-col-resize items-center justify-center focus:outline-none"
-        style={{ left: headerWidth }}
-      >
-        <span
-          className={cn(
-            'h-10 w-0.5 rounded-full transition-colors group-hover:bg-[#CE6F51] group-focus-visible:bg-[#CE6F51]',
-            isResizingHeader ? 'bg-[#CE6F51]' : 'bg-muted-foreground/20'
-          )}
-          aria-hidden
+        onReset={() => setHeaderWidthClamped(HEADER_COL_DEFAULT)}
+        onNudge={(delta) => setHeaderWidthClamped(headerWidth + delta)}
+      />
+      {listColumns.map((col) => (
+        <ColumnResizer
+          key={col.id}
+          left={col.left + col.width}
+          label={`Resize column ${col.title}`}
+          value={col.width}
+          min={LIST_COL_MIN}
+          max={LIST_COL_MAX}
+          isActive={resizingListId === col.id}
+          onMouseDown={(e) => startListResize(col.id, e)}
+          onReset={() => setListWidthClamped(col.id, LIST_COL_DEFAULT)}
+          onNudge={(delta) => setListWidthClamped(col.id, listWidth(col.id) + delta)}
         />
-      </div>
+      ))}
       {swimlanes.map((swimlane, i) => renderRow(swimlane, i))}
       {hasUnassigned && renderRow(null, swimlanes.length)}
       {/* Insert indicator between swimlanes while reordering */}
